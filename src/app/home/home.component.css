@@ -1,0 +1,29 @@
+.course-card {
+  width: 400px;
+  height: 300px;
+  margin: 20px;
+}
+
+.course-card-header-image {
+  background-size: cover;
+}
+
+.search-bar {
+  margin-top: 10px;
+}
+
+.course-brief {
+  height: 100px;
+}
+
+.mat-chip{
+  margin-bottom: 5px;
+}
+
+.semester-selector {
+  margin-left: 75px;
+}
+
+.tags {
+  height: 80px;
+}

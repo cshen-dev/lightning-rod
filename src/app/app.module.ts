@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NavigationModule } from './navigation/navigation.module';
-
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import { NavigationModule } from './navigation/navigation.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NavigationModule
+    NavigationModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

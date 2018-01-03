@@ -1,0 +1,41 @@
+<div class="search-bar" fxLayoutAlign="center">
+  <mat-form-field>
+    <input matInput placeholder="Search Course Here">
+  </mat-form-field>
+</div>
+
+<div fxLayout='row wrap'>
+  <div *ngFor="let course of courses" fxFlex.gt-lg="33%" fxFlex.md="50%" fxFlex.lt-sm="100%" fxLayoutAlign="center">
+
+    <mat-card class="course-card">
+      <mat-card-header>
+        <div mat-card-avatar class="course-card-header-image" [style.background-image]="course.logo"></div>
+        <mat-card-title>{{course.title}}</mat-card-title>
+        <mat-card-subtitle>{{course.code}}</mat-card-subtitle>
+        <button class="semester-selector" mat-icon-button [matMenuTriggerFor]="semester">
+          2017S2
+          <mat-icon>
+            <i class="material-icons">keyboard_arrow_down</i>
+          </mat-icon>
+        </button>
+        <mat-menu #semester="matMenu">
+          <button mat-menu-item>
+            <span>2018S1</span>
+          </button>
+        </mat-menu>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="course-brief">{{course.brief}}</p>
+        <div class="tags">
+          <mat-chip-list>
+            <mat-chip *ngFor="let tag of course.tags" color="{{tag.color}}" selected="true">{{tag.name}} {{tag.upvote}}</mat-chip>
+            <mat-chip>+</mat-chip>
+          </mat-chip-list>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>More</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
