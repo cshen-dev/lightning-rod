@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { CoursesService } from '../service/courses.service';
 
 @NgModule({
   imports: [
@@ -25,6 +26,9 @@ import { MatIconModule } from '@angular/material/icon';
   declarations: [HomeComponent],
   exports: [
     HomeComponent
+  ],
+  providers: [
+    CoursesService
   ]
 })
 export class HomeModule { }

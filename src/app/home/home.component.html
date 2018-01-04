@@ -5,12 +5,12 @@
 </div>
 
 <div fxLayout='row wrap'>
-  <div *ngFor="let course of courses" fxFlex.gt-lg="33%" fxFlex.md="50%" fxFlex.lt-sm="100%" fxLayoutAlign="center">
+  <div *ngFor="let course of courses | async" fxFlex.gt-lg="33%" fxFlex.md="50%" fxFlex.lt-sm="100%" fxLayoutAlign="center">
 
     <mat-card class="course-card">
       <mat-card-header>
         <div mat-card-avatar class="course-card-header-image" [style.background-image]="course.logo"></div>
-        <mat-card-title>{{course.title}}</mat-card-title>
+        <mat-card-title>{{course.name}}</mat-card-title>
         <mat-card-subtitle>{{course.code}} - {{course.instructor}}</mat-card-subtitle>
         <div>
             <button class="semester-selector" mat-icon-button [matMenuTriggerFor]="semester">
@@ -29,7 +29,7 @@
       <mat-card-content>
         <div fxLayout='row wrap'>
           <p fxFlex="70%" class="course-brief">简介: {{course.brief}}</p>
-          <div fxFlex="30%"><img src="../../../assets/instructors/ying_zhou.png" class="instructor-avatar" alt=""></div>
+          <div fxFlex="30%"><img src="{{course.avatar}}" class="instructor-avatar" alt=""></div>
         </div>
         <div class="tags">
           <mat-chip-list>
@@ -44,3 +44,5 @@
     </mat-card>
   </div>
 </div>
+
+
