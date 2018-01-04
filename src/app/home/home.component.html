@@ -11,21 +11,26 @@
       <mat-card-header>
         <div mat-card-avatar class="course-card-header-image" [style.background-image]="course.logo"></div>
         <mat-card-title>{{course.title}}</mat-card-title>
-        <mat-card-subtitle>{{course.code}}</mat-card-subtitle>
-        <button class="semester-selector" mat-icon-button [matMenuTriggerFor]="semester">
-          2017S2
-          <mat-icon>
-            <i class="material-icons">keyboard_arrow_down</i>
-          </mat-icon>
-        </button>
-        <mat-menu #semester="matMenu">
-          <button mat-menu-item>
-            <span>2018S1</span>
-          </button>
-        </mat-menu>
+        <mat-card-subtitle>{{course.code}} - {{course.instructor}}</mat-card-subtitle>
+        <div>
+            <button class="semester-selector" mat-icon-button [matMenuTriggerFor]="semester">
+                2017S2
+                <mat-icon>
+                  <i class="material-icons">keyboard_arrow_down</i>
+                </mat-icon>
+              </button>
+              <mat-menu #semester="matMenu">
+                <button mat-menu-item>
+                  <span>2018S1</span>
+                </button>
+              </mat-menu>
+        </div>
       </mat-card-header>
       <mat-card-content>
-        <p class="course-brief">{{course.brief}}</p>
+        <div fxLayout='row wrap'>
+          <p fxFlex="70%" class="course-brief">简介: {{course.brief}}</p>
+          <div fxFlex="30%"><img src="../../../assets/instructors/ying_zhou.png" class="instructor-avatar" alt=""></div>
+        </div>
         <div class="tags">
           <mat-chip-list>
             <mat-chip *ngFor="let tag of course.tags" color="{{tag.color}}" selected="true">{{tag.name}} {{tag.upvote}}</mat-chip>

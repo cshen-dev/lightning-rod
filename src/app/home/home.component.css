@@ -1,6 +1,6 @@
 .course-card {
   width: 400px;
-  height: 300px;
+  height: 340px;
   margin: 20px;
 }
 
@@ -12,18 +12,22 @@
   margin-top: 10px;
 }
 
-.course-brief {
-  height: 100px;
-}
 
 .mat-chip{
   margin-bottom: 5px;
 }
 
 .semester-selector {
-  margin-left: 75px;
+
 }
 
 .tags {
-  height: 80px;
+  margin-top: 25px;
+}
+
+.instructor-avatar {
+  height: 140px;
+  width: 100px;
+  margin-left: 10px;
+  border: 1px solid #021a40;
 }
