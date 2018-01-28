@@ -1,3 +1,19 @@
-<p>
-  profile works!
-</p>
+<div fxLayout="row">
+  <mat-card class="profile-card" fxFlex="33%" fxFlexOffset="33%">
+    <h1>Profile</h1>
+    <mat-card-content>
+      <section>
+        <mat-form-field floatPlaceholder="auto">
+          <input type="text" matInput placeholder="Display Name" value="{{displayName}}" disabled>
+        </mat-form-field>
+      </section>
+      <section>
+        <mat-form-field floatPlaceholder="auto">
+          <input type="text" matInput placeholder="Email" value="{{email}}" disabled>
+        </mat-form-field>
+      </section>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+</div>

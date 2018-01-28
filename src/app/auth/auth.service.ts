@@ -18,8 +18,8 @@ export class AuthService {
     this.user = firebaseAuth.authState;
   }
 
-  get currentUserObervaable(): any {
-    return this.firebaseAuth.authState;
+  get currentUserObservable(): any {
+    return this.user;
   }
 
   emailSignUp(email: string , password: string) {
@@ -49,12 +49,11 @@ export class AuthService {
   }
 
   public googleLogin() {
-    console.log('here!');
     const provider = new firebase.auth.GoogleAuthProvider();
     return this.socialSignIn(provider);
   }
 
-  logout() {
+  public logout() {
     this.firebaseAuth.auth.signOut();
     this.router.navigate(['home']);
   }
@@ -63,12 +62,15 @@ export class AuthService {
     return this.firebaseAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         this.authState = credential.user;
+        console.log(credential);
         this.updateUserData();
+        this.router.navigate(['home']);
       })
       .catch(err => console.log(err));
   }
 
   private updateUserData(): void {
     // insert user data to db;
+    localStorage.setItem('user', JSON.stringify(this.authState));
   }
 }
