@@ -9,6 +9,9 @@ interface Course {
   semester: string;
   institute: string;
   tags: Array<any>;
+  logo: string;
+  instructor: string;
+  avatar: string;
 }
 
 @Injectable()

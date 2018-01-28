@@ -5,15 +5,19 @@
 </div>
 
 <div fxLayout='row wrap'>
-  <div *ngFor="let course of courses | async" fxFlex.gt-lg="33%" fxFlex.md="50%" fxFlex.lt-sm="100%" fxLayoutAlign="center">
+  <div *ngFor="let course of courses | async" fxFlex.gt-lg="50%" fxFlex.md="100%" fxFlex.lt-sm="100%" fxLayoutAlign="center">
 
     <mat-card class="course-card">
       <mat-card-header>
         <div mat-card-avatar class="course-card-header-image" [style.background-image]="course.logo"></div>
         <mat-card-title>{{course.name}}</mat-card-title>
         <mat-card-subtitle>{{course.code}} - {{course.instructor}}</mat-card-subtitle>
-        <div>
-            <button class="semester-selector" mat-icon-button [matMenuTriggerFor]="semester">
+      </mat-card-header>
+      <mat-card-content>
+        <div fxLayout='row wrap'>
+          <div fxFlex="30%">
+            <div class="semester-selector">
+              <button  mat-icon-button [matMenuTriggerFor]="semester">
                 2017S2
                 <mat-icon>
                   <i class="material-icons">keyboard_arrow_down</i>
@@ -24,18 +28,39 @@
                   <span>2018S1</span>
                 </button>
               </mat-menu>
-        </div>
-      </mat-card-header>
-      <mat-card-content>
-        <div fxLayout='row wrap'>
-          <p fxFlex="70%" class="course-brief">简介: {{course.brief}}</p>
-          <div fxFlex="30%"><img src="{{course.avatar}}" class="instructor-avatar" alt=""></div>
-        </div>
-        <div class="tags">
-          <mat-chip-list>
-            <mat-chip *ngFor="let tag of course.tags" color="{{tag.color}}" selected="true">{{tag.name}} {{tag.upvote}}</mat-chip>
-            <mat-chip>+</mat-chip>
-          </mat-chip-list>
+            </div>
+
+            <div>
+              <img src="{{course.avatar}}" class="instructor-avatar" alt="">
+            </div>
+          </div>
+          <div fxFlex="70%">
+            <ul class="tags-group">
+              <li fxLayout='row wrap'>
+                <p class="tag-header" fxFlex="30%">
+                  Work Load
+                </p>
+                <div fxFlex="70%">
+                  <mat-chip-list>
+                    <mat-chip *ngFor="let tag of course.tags" color="{{tag.color}}" selected="true">{{tag.name}} {{tag.upvote}}</mat-chip>
+                    <mat-chip>+</mat-chip>
+                  </mat-chip-list>
+                </div>
+              </li>
+              <li fxLayout='row wrap'>
+                <p class="tag-header" fxFlex="30%">
+                  Assignment
+                </p>
+                <div fxFlex="70%">
+                  <mat-chip-list>
+                    <mat-chip *ngFor="let tag of course.tags" color="{{tag.color}}" selected="true">{{tag.name}} {{tag.upvote}}</mat-chip>
+                    <mat-chip>+</mat-chip>
+                  </mat-chip-list>
+                </div>
+              </li>
+
+            </ul>
+          </div>
         </div>
       </mat-card-content>
       <mat-card-actions>
@@ -44,5 +69,3 @@
     </mat-card>
   </div>
 </div>
-
-

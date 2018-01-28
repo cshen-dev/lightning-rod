@@ -1,6 +1,5 @@
 .course-card {
-  width: 400px;
-  height: 340px;
+  width: 800px;
   margin: 20px;
 }
 
@@ -18,11 +17,26 @@
 }
 
 .semester-selector {
-
+  margin-left: 40px;
+  margin-bottom: 10px;
 }
 
 .tags {
   margin-top: 25px;
+}
+
+.tag-header {
+  margin-top: 8px;
+  /* border-left: 3px solid black; */
+  padding-left: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  display: list-item;
+  list-style: circle;
+}
+
+.tags-group{
+  padding-left: 0px;
 }
 
 .instructor-avatar {
