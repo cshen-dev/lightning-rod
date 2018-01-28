@@ -1,0 +1,14 @@
+.login-card {
+  margin-top: 60px;
+  margin-left: 60px;
+  margin-right: 60px;
+  height: 300px;
+}
+
+.google-login {
+  background: url('../../../assets/img/google_signin_dark_normal.png');
+  width: 382px;
+  height: 92px;
+  border: none;
+  cursor: pointer;
+}

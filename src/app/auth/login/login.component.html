@@ -1,0 +1,33 @@
+<div fxLayout="row wrap">
+  <div fxFlex.gt-sm="50%" fxFlex.lt-sm="50%">
+    <mat-card class="login-card">
+      <h1>Log In</h1>
+      <mat-card-content>
+        <section>
+          <mat-form-field floatPlaceholder="auto">
+            <input type="text" matInput placeholder="Email">
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field floatPlaceholder="auto">
+            <input type="password" matInput placeholder="Password">
+          </mat-form-field>
+        </section>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button routerLink="/">Login</button>
+        <button mat-button routerLink="/signup">Sign up</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div fxFlex.gt-sm="50%" fxFlex.lt-sm="50%">
+    <mat-card class="login-card">
+      <h1>3rd Party Login</h1>
+      <mat-card-content>
+        <section>
+          <button class="google-login" (click)="onGoogleLogin()"></button>
+        </section>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
