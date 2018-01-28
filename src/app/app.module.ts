@@ -24,6 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { CoursesService } from './service/courses.service';
+import { AboutComponent } from './about/about.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -31,6 +33,8 @@ const appRoutes: Routes = [
   { path: 'detail', component: DetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -38,7 +42,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     DetailComponent,
-    HomeComponent
+    HomeComponent,
+    AboutComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
