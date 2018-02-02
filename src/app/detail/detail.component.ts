@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CoursesService } from '../service/courses.service';
+import { Observable } from 'rxjs/Observable';
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -12,7 +15,11 @@ export class DetailComponent implements OnInit {
     code: 'COMP5348'
   };
 
-  constructor() { }
+  detail = null;
+
+  constructor(private _coursesService: CoursesService) {
+    // this.detail = _coursesService.getCourseDetail('DekvhbRMwq4ywSe51G4D');
+  }
 
   ngOnInit() {
   }

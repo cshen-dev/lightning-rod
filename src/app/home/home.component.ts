@@ -2,6 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../service/courses.service';
 import { Observable } from 'rxjs/Observable';
 
+import { Vote } from '../service/courses.service';
+
+interface CourseViewModel {
+  name: string;
+  code: string;
+  semester: string;
+  institute: string;
+  logo: string;
+  instructor: string;
+  avatar: string;
+  assignment: Array<Vote>;
+  exam: Array<Vote>;
+  marking: Array<Vote>;
+  programming: Array<Vote>;
+  workload: Array<Vote>;
+  verions: Array<any>;
+}
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,76 +28,47 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomeComponent implements OnInit {
 
-  courses: Observable<any[]>;
+  courses: Array<CourseViewModel> = [];
+
   constructor(private _coursesService: CoursesService) {
-    this.courses = _coursesService.getDummyFromFirebase();
+    _coursesService.getCoursesInfo().subscribe(courses => {
+      // console.log(courses);
+      courses.map(courseInfo => {
+
+        // console.log(courseInfo);
+        let tmpVersion;
+        courseInfo.versions.forEach(version => {
+          if (!tmpVersion || new Date(tmpVersion['createdAt']).getTime() < new Date(version['createdAt']).getTime()) {
+            tmpVersion = version;
+          }
+        });
+        // console.log(tmpVersion);
+        _coursesService.getCourseDetail(courseInfo.id, tmpVersion['name']).subscribe(courseDetail => {
+          // console.log(courseDetail);
+          const newCourseViewModel = {} as CourseViewModel;
+          newCourseViewModel.code = courseInfo.code;
+          newCourseViewModel.logo = courseInfo.logo;
+          newCourseViewModel.verions = courseInfo.versions;
+          console.log(newCourseViewModel.verions);
+          newCourseViewModel.institute = courseInfo.institute;
+          newCourseViewModel.name = courseDetail[0].name;
+          newCourseViewModel.avatar = courseDetail[0].avatar;
+          newCourseViewModel.instructor = courseDetail[0].instructor;
+          newCourseViewModel.workload = courseDetail[0].workload;
+          newCourseViewModel.assignment = courseDetail[0].assignment;
+          newCourseViewModel.exam = courseDetail[0].exam;
+          newCourseViewModel.programming = courseDetail[0].programming;
+          newCourseViewModel.marking = courseDetail[0].marking;
+          this.courses.push(newCourseViewModel);
+        });
+
+      });
+    });
   }
 
-  // courses = [
-  //   {
-  //     title: 'Web application development',
-  //     code: 'COMP5347',
-  //     instructor: 'Ying Zhou',
-  //     brief: 'Web application 是一门教制作网站的课，主要教授的技术栈是MEAN，即MongoDB，ExpressJS，Angular，NodeJS',
-  //     cols: 1,
-  //     rows: 1,
-  //     tags: [
-  //       {name: '比较实用', upvote: '10', downvote: '1', color: 'accent'},
-  //       {name: '大作业比较费事', upvote: '9', downvote: '1', color: 'primary'},
-  //       {name: 'No suprise', upvote: '7', downvote: '1', color: 'default'},
-  //       {name: '考试贼烦', upvote: '5', downvote: '1', color: 'default'}],
-  //     color: 'lightblue',
-  //     logo: `url('../../../assets/img/usyd.png')`
-  //   },
-  //   {
-  //     title: 'Project Management',
-  //     code: 'INFO6007',
-  //     instructor: 'Bernald Wong',
-  //     brief: 'Project Management 是一门管理课，曾经有恐怖的30%的挂科率，后来换了个华裔老师后，挂科率降下来了。上课纯吹牛，考试靠自己读教材',
-  //     cols: 1,
-  //     rows: 1,
-  //     tags: [
-  //       {name: '上课比较扯淡', upvote: '19', downvote: '1', color: 'accent'},
-  //       {name: '没啥作业', upvote: '11', downvote: '1', color: 'primary'},
-  //       {name: 'Bernald Wong威武', upvote: '10', downvote: '1', color: 'default'},
-  //       {name: '选周五的课', upvote: '8', downvote: '1', color: 'default'},
-  //       {name: '考试不知道考的啥', upvote: '5', downvote: '1', color: 'default'},
-  //       {name: '看选择题', upvote: '3', downvote: '1', color: 'default'}],
-  //     color: 'lightblue',
-  //     logo: `url('../../../assets/img/usyd.png')`
-  //   },
-  //   {
-  //     title: 'Cloud Computing',
-  //     code: 'COMP5349',
-  //     instructor: 'Uwe',
-  //     brief: 'Web application 是一门教制作网站的课，主要教授的技术栈是MEAN，即MongoDB，ExpressJS，Angular，NodeJS',
-  //     cols: 1,
-  //     rows: 1,
-  //     tags: [
-  //       {name: '比较实用', upvote: '10', downvote: '1', color: 'accent'},
-  //       {name: '大作业比较费事', upvote: '10', downvote: '1', color: 'primary'},
-  //       {name: '考试贼烦', upvote: '10', downvote: '1', color: 'default'}],
-  //     color: 'lightblue',
-  //     logo: `url('../../../assets/img/usyd.png')`
-  //   },
-  //   {
-  //     title: 'IT Innovation',
-  //     code: 'INFO5992',
-  //     instructor: 'Jinman Kim',
-  //     brief: 'Web application 是一门教制作网站的课，主要教授的技术栈是MEAN，即MongoDB，ExpressJS，Angular，NodeJS',
-  //     cols: 1,
-  //     rows: 1,
-  //     tags: [
-  //       {name: '比较实用', upvote: '10', downvote: '1', color: 'accent'},
-  //       {name: '大作业比较费事', upvote: '10', downvote: '1', color: 'primary'},
-  //       {name: '考试贼烦', upvote: '10', downvote: '1', color: 'default'}],
-  //     color: 'lightblue',
-  //     logo: `url('../../../assets/img/usyd.png')`
-  //   }
-  // ];
 
   ngOnInit() {
-    console.log(this._coursesService.getDummy());
+
   }
 
 }
