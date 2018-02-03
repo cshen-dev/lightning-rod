@@ -4,7 +4,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { Vote } from '../service/courses.service';
+import { Review, ReviewCreator, CourseVersion } from '../service/courses.service';
+import * as firebase from 'firebase/app';
+
+import { AuthService } from '../auth/auth.service';
 
 interface CourseViewModel {
   name: string;
@@ -20,15 +23,14 @@ interface CourseViewModel {
   programming: Array<Vote>;
   workload: Array<Vote>;
   versions: Array<CourseVersion>;
+  id: string;
 }
 
-interface CourseVersion {
-  avatar: string;
-  createdAt: Date;
-  instructor: string;
-  name: string;
-  semester: Array<string>;
+interface Vote {
+  tag: string;
+  upvote: number;
 }
+
 
 @Component({
   selector: 'app-home',
@@ -38,10 +40,16 @@ interface CourseVersion {
 export class HomeComponent implements OnInit {
 
   courses: Array<CourseViewModel> = [];
+  currentCourseReviewer: ReviewCreator;
 
   constructor(
+    private authService: AuthService,
     private _coursesService: CoursesService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+  ) {
+    this.authService.currentUserObservable.subscribe((user) => {
+      this.currentCourseReviewer = { displayName: user.displayName, uid: user.uid };
+    });
   }
 
 
@@ -52,77 +60,88 @@ export class HomeComponent implements OnInit {
   loadCourseInfo() {
     this._coursesService.getCoursesInfo().subscribe(courses => {
       console.log(courses);
-      courses.map(courseInfo => {
-
-        let tmpVersion;
-        courseInfo.versions.forEach(version => {
-          if (!tmpVersion || new Date(tmpVersion['createdAt']).getTime() < new Date(version['createdAt']).getTime()) {
-            tmpVersion = version;
-          }
-        });
-        console.log(courseInfo.versions);
-        // console.log(tmpVersion);
-        this._coursesService.getCourseReviews(courseInfo.id, tmpVersion.instructor).subscribe(reviews => {
-          console.log(reviews);
-          if (reviews.length === 0) {
-            return;
-          }
-          const newCourseViewModel = {} as CourseViewModel;
-          newCourseViewModel.code = courseInfo.code;
-          newCourseViewModel.logo = courseInfo.logo;
-          newCourseViewModel.versions = courseInfo.versions;
-          newCourseViewModel.institute = courseInfo.institute;
-          newCourseViewModel.name = tmpVersion.name;
-          newCourseViewModel.avatar = tmpVersion.avatar;
-          newCourseViewModel.instructor = tmpVersion.instructor;
-
-          newCourseViewModel.workload = [];
-          newCourseViewModel.assignment = [];
-          newCourseViewModel.exam = [];
-          newCourseViewModel.programming = [];
-          newCourseViewModel.marking = [];
-
-          const workloadMap = new Map();
-          const assignmentMap = new Map();
-          const examMap = new Map();
-          const programmingMap = new Map();
-          const markingMap = new Map();
-
-          reviews.forEach(review => {
-            switch (review.category) {
-              case 'exam': {
-                this.doStats(examMap, review);
-                break;
-              }
-              case 'workload': {
-                this.doStats(workloadMap, review);
-                break;
-              }
-              case 'assignment': {
-                this.doStats(assignmentMap, review);
-                break;
-              }
-              case 'programming': {
-                this.doStats(programmingMap, review);
-                break;
-              }
-              case 'marking': {
-                this.doStats(markingMap, review);
-                break;
-              }
-            }
-          });
-          this.map2arr(workloadMap, newCourseViewModel.workload);
-          this.map2arr(assignmentMap, newCourseViewModel.assignment);
-          this.map2arr(examMap, newCourseViewModel.exam);
-          this.map2arr(markingMap, newCourseViewModel.marking);
-          this.map2arr(programmingMap, newCourseViewModel.programming);
-          console.log(newCourseViewModel);
-          this.courses.push(newCourseViewModel);
-        });
-
-      });
+      courses.forEach(course => { this.parseCourse(course); });
     });
+  }
+
+  chooseLastedVersion(versions) {
+    let tmpVersion;
+    versions.forEach(version => {
+      if (!tmpVersion || new Date(tmpVersion['createdAt']).getTime() < new Date(version['createdAt']).getTime()) {
+        tmpVersion = version;
+      }
+    });
+    return tmpVersion;
+  }
+
+  loadReviews(courseViewModel, reviews) {
+    courseViewModel.workload = [];
+    courseViewModel.assignment = [];
+    courseViewModel.exam = [];
+    courseViewModel.programming = [];
+    courseViewModel.marking = [];
+
+
+    const workloadMap = new Map();
+    const assignmentMap = new Map();
+    const examMap = new Map();
+    const programmingMap = new Map();
+    const markingMap = new Map();
+
+    reviews.forEach(review => {
+      switch (review.category) {
+        case 'exam': {
+          this.doStats(examMap, review);
+          break;
+        }
+        case 'workload': {
+          this.doStats(workloadMap, review);
+          break;
+        }
+        case 'assignment': {
+          this.doStats(assignmentMap, review);
+          break;
+        }
+        case 'programming': {
+          this.doStats(programmingMap, review);
+          break;
+        }
+        case 'marking': {
+          this.doStats(markingMap, review);
+          break;
+        }
+      }
+    });
+    this.map2arr(workloadMap, courseViewModel.workload);
+    this.map2arr(assignmentMap, courseViewModel.assignment);
+    this.map2arr(examMap, courseViewModel.exam);
+    this.map2arr(markingMap, courseViewModel.marking);
+    this.map2arr(programmingMap, courseViewModel.programming);
+  }
+
+  parseCourse(courseInfo) {
+      const latestVersion = this.chooseLastedVersion(courseInfo.versions);
+
+      this._coursesService.getCourseReviews(courseInfo.id, latestVersion.instructor).subscribe(reviews => {
+
+        if (reviews.length === 0) {
+          return;
+        }
+        const newCourseViewModel = {} as CourseViewModel;
+        newCourseViewModel.code = courseInfo.code;
+        newCourseViewModel.logo = courseInfo.logo;
+        newCourseViewModel.versions = courseInfo.versions;
+        newCourseViewModel.institute = courseInfo.institute;
+        newCourseViewModel.id = courseInfo.id;
+        newCourseViewModel.name = latestVersion.name;
+        newCourseViewModel.avatar = latestVersion.avatar;
+        newCourseViewModel.instructor = latestVersion.instructor;
+
+        this.loadReviews(newCourseViewModel, reviews);
+
+        console.log(newCourseViewModel);
+        this.courses.push(newCourseViewModel);
+      });
   }
 
   doStats(map, review) {
@@ -135,7 +154,7 @@ export class HomeComponent implements OnInit {
   }
 
   map2arr(map, arr) {
-    map.forEach( (value, key) => {
+    map.forEach((value, key) => {
       const vote = {} as Vote;
       vote.tag = key;
       vote.upvote = value;
@@ -147,7 +166,8 @@ export class HomeComponent implements OnInit {
     this._coursesService.createSeedData();
   }
 
-  addReview(category): void {
+  addReview(category, course): void {
+    console.log(course);
     const dialogRef = this.dialog.open(AddReviewDialogComponent, {
       width: 'auto',
       data: { category: category }
@@ -155,7 +175,15 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.tag = result;
+      const newReview = {} as Review;
+      newReview.category = category;
+      newReview.createdAt = new Date();
+      newReview.createdBy = this.currentCourseReviewer;
+      newReview.instructor = course.instructor;
+      newReview.tag = result;
+      console.log(newReview);
+      console.log(course.id);
+      this._coursesService.addReviews(course.id, newReview);
     });
   }
 }

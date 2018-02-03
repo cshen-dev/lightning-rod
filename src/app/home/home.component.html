@@ -4,7 +4,6 @@
   </mat-form-field>
 </div>
 
-<button mat-button (click)="addSeed()">Add seed data</button>
 
 <div fxLayout='row wrap'>
   <div *ngFor="let course of courses" fxFlex.gt-lg="50%" fxFlex.md="100%" fxFlex.lt-sm="100%" fxLayoutAlign="center">
@@ -45,7 +44,7 @@
                 <div fxFlex="70%">
                   <mat-chip-list>
                     <mat-chip *ngFor="let item of course.workload"  selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
-                    <mat-chip (click)="addReview('Work Load')">+</mat-chip>
+                    <mat-chip (click)="addReview('workload', course)">+</mat-chip>
                   </mat-chip-list>
                 </div>
               </li>

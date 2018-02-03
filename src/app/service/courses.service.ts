@@ -1,42 +1,33 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase/app';
 
 import { AuthService } from '../auth/auth.service';
 
-// interface Course {
-//   name: string;
-//   brief: string;
-//   code: string;
-//   semester: string;
-//   institute: string;
-//   tags: Array<any>;
-//   logo: string;
-//   instructor: string;
-//   avatar: string;
-// }
-
-
-interface CourseInfo {
+export interface CourseInfo {
   code: string;
   institute: string;
   lastUpdatedAt: Date;
   logo: string;
-  versions: Array<any>;
+  versions: Array<CourseVersion>;
   id: string;
 }
 
-export interface Vote {
-  tag: string;
-  upvote: number;
+export interface CourseVersion {
+  avatar: string;
+  createdAt: Date;
+  instructor: string;
+  name: string;
+  semesters: Array<string>;
 }
 
-interface ReviewCreator {
+export interface ReviewCreator {
   displayName: string;
   uid: string;
 }
 
-interface Review {
+export interface Review {
   id: string;
   category: string;
   createdAt: Date;
@@ -50,8 +41,13 @@ interface Review {
 @Injectable()
 export class CoursesService {
 
-  constructor(private afs: AngularFirestore,
-    private authService: AuthService) { }
+  user: Observable<firebase.User>;
+
+  constructor(
+    private afs: AngularFirestore,
+    private authService: AuthService) {
+    this.user = authService.currentUserObservable;
+  }
 
 
   public getCoursesInfo(): Observable<CourseInfo[]> {
@@ -79,7 +75,7 @@ export class CoursesService {
 
     const creator = {} as ReviewCreator;
 
-    this.authService.user.subscribe( user => {
+    this.authService.user.subscribe(user => {
       console.log(user.displayName);
       console.log(user.uid);
       creator.uid = user.uid;
@@ -107,7 +103,7 @@ export class CoursesService {
     this.afs
       .collection('courses')
       .add(newCourseInfo)
-      .then( ref => {
+      .then(ref => {
         const newReview = {} as Review;
         newReview.category = 'workload';
         newReview.tag = '还行';
@@ -149,6 +145,14 @@ export class CoursesService {
         newReview.instructor = 'Dr Zhou, Ying';
         ref.collection('reviews').add(newReview);
       });
+  }
+
+  public addReviews(courseId, newReview) {
+    return this.afs
+      .collection('courses')
+      .doc(courseId)
+      .collection('reviews')
+      .add(newReview);
   }
 
 }
