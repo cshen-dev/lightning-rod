@@ -1,12 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { CoursesService } from '../service/courses.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import * as firebase from 'firebase/app';
+import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Review, ReviewCreator, CourseVersion } from '../service/courses.service';
-import * as firebase from 'firebase/app';
-
+import { CoursesService } from '../service/courses.service';
 import { AuthService } from '../auth/auth.service';
 
 interface CourseViewModel {
@@ -41,6 +41,8 @@ export class HomeComponent implements OnInit {
 
   courses: Array<CourseViewModel> = [];
   currentCourseReviewer: ReviewCreator;
+  private subscriptions: Array<Subscription> = [];
+  private versionPreference: Map<string, number> = new Map();
 
   constructor(
     private authService: AuthService,
@@ -58,10 +60,12 @@ export class HomeComponent implements OnInit {
   }
 
   loadCourseInfo() {
-    this._coursesService.getCoursesInfo().subscribe(courses => {
+    console.log('start load course info');
+    const courseInfoSubscription = this._coursesService.getCoursesInfo().subscribe(courses => {
       console.log(courses);
       courses.forEach(course => { this.parseCourse(course); });
     });
+    this.subscriptions.push(courseInfoSubscription);
   }
 
   chooseLastedVersion(versions) {
@@ -72,6 +76,32 @@ export class HomeComponent implements OnInit {
       }
     });
     return tmpVersion;
+  }
+
+  checkVersionPriority(versions) {
+    let tmpVersion: CourseVersion;
+    const tmpMax = 0;
+    versions.forEach(version => {
+      if (this.versionPreference.has(version.instructor)) {
+        if (this.versionPreference.get(version.instructor) > tmpMax) {
+          tmpVersion = version;
+        }
+      }
+    });
+    return tmpVersion;
+  }
+
+  public tuneVersionPriority(instructor) {
+    if (this.versionPreference.has(instructor)) {
+      const oldVal = this.versionPreference.get(instructor);
+      this.versionPreference.set(instructor, oldVal + 1);
+    } else {
+      this.versionPreference.set(instructor, 1);
+    }
+    this.subscriptions.forEach(item => {
+      item.unsubscribe();
+    });
+    this.loadCourseInfo();
   }
 
   loadReviews(courseViewModel, reviews) {
@@ -119,29 +149,40 @@ export class HomeComponent implements OnInit {
     this.map2arr(programmingMap, courseViewModel.programming);
   }
 
+
+
   parseCourse(courseInfo) {
-      const latestVersion = this.chooseLastedVersion(courseInfo.versions);
+    console.log('start load reviews');
 
-      this._coursesService.getCourseReviews(courseInfo.id, latestVersion.instructor).subscribe(reviews => {
+    let selectedVersion = this.checkVersionPriority(courseInfo.versions);
+    if (!selectedVersion) {
+      selectedVersion = this.chooseLastedVersion(courseInfo.versions);
+    }
 
-        if (reviews.length === 0) {
-          return;
-        }
-        const newCourseViewModel = {} as CourseViewModel;
-        newCourseViewModel.code = courseInfo.code;
-        newCourseViewModel.logo = courseInfo.logo;
-        newCourseViewModel.versions = courseInfo.versions;
-        newCourseViewModel.institute = courseInfo.institute;
-        newCourseViewModel.id = courseInfo.id;
-        newCourseViewModel.name = latestVersion.name;
-        newCourseViewModel.avatar = latestVersion.avatar;
-        newCourseViewModel.instructor = latestVersion.instructor;
+    console.log('selectedVersion:', selectedVersion);
 
-        this.loadReviews(newCourseViewModel, reviews);
+    const reviewSubscription = this._coursesService.getCourseReviews(courseInfo.id, selectedVersion.instructor).subscribe(reviews => {
 
-        console.log(newCourseViewModel);
-        this.courses.push(newCourseViewModel);
-      });
+      if (reviews.length === 0) {
+        return;
+      }
+      const newCourseViewModel = {} as CourseViewModel;
+      newCourseViewModel.code = courseInfo.code;
+      newCourseViewModel.logo = courseInfo.logo;
+      newCourseViewModel.versions = courseInfo.versions;
+      newCourseViewModel.institute = courseInfo.institute;
+      newCourseViewModel.id = courseInfo.id;
+      newCourseViewModel.name = selectedVersion.name;
+      newCourseViewModel.avatar = selectedVersion.avatar;
+      newCourseViewModel.instructor = selectedVersion.instructor;
+
+      this.loadReviews(newCourseViewModel, reviews);
+
+      console.log(newCourseViewModel);
+      this.courses.splice(0, this.courses.length);
+      this.courses.push(newCourseViewModel);
+    });
+    this.subscriptions.push(reviewSubscription);
   }
 
   doStats(map, review) {
@@ -166,7 +207,19 @@ export class HomeComponent implements OnInit {
     this._coursesService.createSeedData();
   }
 
-  addReview(category, course): void {
+  addReview(category, course, tag): void {
+    const newReview = {} as Review;
+    newReview.category = category;
+    newReview.createdAt = new Date();
+    newReview.createdBy = this.currentCourseReviewer;
+    newReview.instructor = course.instructor;
+    newReview.tag = tag;
+    console.log(newReview);
+    console.log(course.id);
+    this._coursesService.addReviews(course.id, newReview);
+  }
+
+  popReviewDialog(category, course): void {
     console.log(course);
     const dialogRef = this.dialog.open(AddReviewDialogComponent, {
       width: 'auto',
@@ -174,16 +227,10 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      const newReview = {} as Review;
-      newReview.category = category;
-      newReview.createdAt = new Date();
-      newReview.createdBy = this.currentCourseReviewer;
-      newReview.instructor = course.instructor;
-      newReview.tag = result;
-      console.log(newReview);
-      console.log(course.id);
-      this._coursesService.addReviews(course.id, newReview);
+      if (!result) {
+        return;
+      }
+      this.addReview(category, course, result);
     });
   }
 }
@@ -199,6 +246,7 @@ export class AddReviewDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
+    this.data.tag = null;
     this.dialogRef.close();
   }
 }

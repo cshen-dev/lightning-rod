@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { CoursesService } from '../service/courses.service';
-import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'app-detail',

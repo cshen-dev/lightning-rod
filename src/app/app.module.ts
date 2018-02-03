@@ -3,19 +3,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
-import { environment } from './../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-
-import { AppComponent } from './app.component';
-import { NavigationModule } from './navigation/navigation.module';
-import { DetailComponent } from './detail/detail.component';
-import { HomeComponent, AddReviewDialogComponent } from './home/home.component';
-import { AuthModule } from './auth/auth.module';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
-
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
@@ -25,9 +14,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { CoursesService } from './service/courses.service';
+import { environment } from './../environments/environment';
+
+import { AuthModule } from './auth/auth.module';
 import { AboutComponent } from './about/about.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AppComponent } from './app.component';
+import { NavigationModule } from './navigation/navigation.module';
+import { DetailComponent } from './detail/detail.component';
+import { HomeComponent, AddReviewDialogComponent } from './home/home.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { CoursesService } from './service/courses.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
