@@ -15,7 +15,7 @@
 
 
 <div fxLayout='row wrap'>
-  <div *ngFor="let course of courses" fxFlex.gt-lg="50%" fxFlex.md="100%" fxFlex.lt-sm="100%" fxLayoutAlign="center">
+  <div *ngFor="let course of courses" fxFlex="100%" fxLayoutAlign="center">
 
     <mat-card class="course-card">
       <mat-card-header>
@@ -45,7 +45,7 @@
             </div>
           </div>
           <div fxFlex="70%">
-            <p>This instructor has taught this course for </p>
+            <p>This instructor has taught this course for {{course.semester}}</p>
             <ul class="tags-group">
               <li fxLayout='row wrap'>
                 <p class="tag-header" fxFlex="30%">

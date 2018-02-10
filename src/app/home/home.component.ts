@@ -160,7 +160,19 @@ export class HomeComponent implements OnInit {
     this.map2arr(programmingMap, courseViewModel.programming);
   }
 
-
+  buildSemesterStr(semesters) {
+    let semesterStr = '';
+    let firstFlag = true;
+    semesters.forEach(semester => {
+      if (firstFlag) {
+        semesterStr += semester;
+        firstFlag = false;
+        return;
+      }
+      semesterStr += ', ' + semester;
+    });
+    return semesterStr;
+  }
 
   loadCourseReview(courseInfo) {
 
@@ -183,6 +195,8 @@ export class HomeComponent implements OnInit {
       newCourseViewModel.name = selectedVersion.name;
       newCourseViewModel.avatar = selectedVersion.avatar;
       newCourseViewModel.instructor = selectedVersion.instructor;
+
+      newCourseViewModel.semester = this.buildSemesterStr(selectedVersion.semesters);
 
       this.parseReviews(newCourseViewModel, reviews);
 
