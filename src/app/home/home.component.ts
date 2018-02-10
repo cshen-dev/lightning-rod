@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
   courses: Array<CourseViewModel> = [];
   currentCourseReviewer: ReviewCreator;
   private subscriptions: Array<Subscription> = [];
-  private versionPreference: Map<string, number> = new Map();
+  private versionPreference: Map<string, Date> = new Map();
 
   constructor(
     private authService: AuthService,
@@ -56,18 +56,16 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-    this.loadCourseInfo();
+    this.loadCoursesList();
   }
 
-  loadCourseInfo() {
-    console.log('start load course info');
+  loadCoursesList() {
     const courseInfoSubscription = this._coursesService.getCoursesInfo().subscribe(courses => {
-      console.log(courses);
-      courses.forEach(course => { this.parseCourse(course); });
+      courses.forEach(course => { this.loadCourseReview(course); });
     });
     this.subscriptions.push(courseInfoSubscription);
   }
-
+  /** This function is used for first loading when no version preference is set then */
   chooseLastedVersion(versions) {
     let tmpVersion;
     versions.forEach(version => {
@@ -78,12 +76,29 @@ export class HomeComponent implements OnInit {
     return tmpVersion;
   }
 
-  checkVersionPriority(versions) {
+  /** This function is applied after user choose specific version and version preference is set */
+  chooseHighPriority(versions) {
+
+    if (versions.length === 1) {
+      return versions[0];
+    }
+
     let tmpVersion: CourseVersion;
-    const tmpMax = 0;
+    let tmpMax;
+    let firstFlag = true;
+    const versionPreferenceMap = this.versionPreference;
+
     versions.forEach(version => {
-      if (this.versionPreference.has(version.instructor)) {
-        if (this.versionPreference.get(version.instructor) > tmpMax) {
+      if (versionPreferenceMap.has(version.instructor)) {
+        if (firstFlag) {
+          tmpMax = versionPreferenceMap.get(version.instructor);
+          tmpVersion = version;
+          firstFlag = false;
+          return;
+        }
+
+        if (versionPreferenceMap.get(version.instructor).getTime() > tmpMax.getTime()) {
+          tmpMax = versionPreferenceMap.get(version.instructor);
           tmpVersion = version;
         }
       }
@@ -92,19 +107,15 @@ export class HomeComponent implements OnInit {
   }
 
   public tuneVersionPriority(instructor) {
-    if (this.versionPreference.has(instructor)) {
-      const oldVal = this.versionPreference.get(instructor);
-      this.versionPreference.set(instructor, oldVal + 1);
-    } else {
-      this.versionPreference.set(instructor, 1);
-    }
+    this.versionPreference.set(instructor, new Date());
+
     this.subscriptions.forEach(item => {
       item.unsubscribe();
     });
-    this.loadCourseInfo();
+    this.loadCoursesList();
   }
 
-  loadReviews(courseViewModel, reviews) {
+  parseReviews(courseViewModel, reviews) {
     courseViewModel.workload = [];
     courseViewModel.assignment = [];
     courseViewModel.exam = [];
@@ -151,15 +162,12 @@ export class HomeComponent implements OnInit {
 
 
 
-  parseCourse(courseInfo) {
-    console.log('start load reviews');
+  loadCourseReview(courseInfo) {
 
-    let selectedVersion = this.checkVersionPriority(courseInfo.versions);
+    let selectedVersion = this.chooseHighPriority(courseInfo.versions);
     if (!selectedVersion) {
       selectedVersion = this.chooseLastedVersion(courseInfo.versions);
     }
-
-    console.log('selectedVersion:', selectedVersion);
 
     const reviewSubscription = this._coursesService.getCourseReviews(courseInfo.id, selectedVersion.instructor).subscribe(reviews => {
 
@@ -176,9 +184,8 @@ export class HomeComponent implements OnInit {
       newCourseViewModel.avatar = selectedVersion.avatar;
       newCourseViewModel.instructor = selectedVersion.instructor;
 
-      this.loadReviews(newCourseViewModel, reviews);
+      this.parseReviews(newCourseViewModel, reviews);
 
-      console.log(newCourseViewModel);
       this.courses.splice(0, this.courses.length);
       this.courses.push(newCourseViewModel);
     });
@@ -214,13 +221,10 @@ export class HomeComponent implements OnInit {
     newReview.createdBy = this.currentCourseReviewer;
     newReview.instructor = course.instructor;
     newReview.tag = tag;
-    console.log(newReview);
-    console.log(course.id);
     this._coursesService.addReviews(course.id, newReview);
   }
 
   popReviewDialog(category, course): void {
-    console.log(course);
     const dialogRef = this.dialog.open(AddReviewDialogComponent, {
       width: 'auto',
       data: { category: category }
