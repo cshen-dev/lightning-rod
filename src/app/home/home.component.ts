@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import * as firebase from 'firebase/app';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -48,9 +48,14 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private _coursesService: CoursesService,
     public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) {
     this.authService.currentUserObservable.subscribe((user) => {
-      this.currentCourseReviewer = { displayName: user.displayName, uid: user.uid };
+      if (user) {
+        this.currentCourseReviewer = { displayName: user.displayName, uid: user.uid };
+      }else {
+        this.currentCourseReviewer = null;
+      }
     });
   }
 
@@ -228,7 +233,21 @@ export class HomeComponent implements OnInit {
     this._coursesService.createSeedData();
   }
 
+  checkIsLogedIn() {
+    if (this.currentCourseReviewer) {
+      return true;
+    }else {
+      return false;
+    }
+  }
+
   addReview(category, course, tag): void {
+    if (!this.checkIsLogedIn()) {
+      this.snackBar.openFromComponent(AlarmSnackComponent, {
+        duration: 2000,
+      });
+      return;
+    }
     const newReview = {} as Review;
     newReview.category = category;
     newReview.createdAt = new Date();
@@ -239,6 +258,12 @@ export class HomeComponent implements OnInit {
   }
 
   popReviewDialog(category, course): void {
+    if (!this.checkIsLogedIn()) {
+      this.snackBar.openFromComponent(AlarmSnackComponent, {
+        duration: 2000,
+      });
+      return;
+    }
     const dialogRef = this.dialog.open(AddReviewDialogComponent, {
       width: 'auto',
       data: { category: category }
@@ -268,3 +293,9 @@ export class AddReviewDialogComponent {
     this.dialogRef.close();
   }
 }
+
+@Component({
+  selector: 'app-alarm-snack',
+  templateUrl: 'app-alarm-snack.html',
+})
+export class AlarmSnackComponent {}

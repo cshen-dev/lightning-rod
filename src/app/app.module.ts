@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { environment } from './../environments/environment';
 
 import { AuthModule } from './auth/auth.module';
@@ -22,7 +23,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AppComponent } from './app.component';
 import { NavigationModule } from './navigation/navigation.module';
 import { DetailComponent } from './detail/detail.component';
-import { HomeComponent, AddReviewDialogComponent } from './home/home.component';
+import { HomeComponent, AddReviewDialogComponent, AlarmSnackComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { CoursesService } from './service/courses.service';
@@ -45,9 +46,10 @@ const appRoutes: Routes = [
     HomeComponent,
     AboutComponent,
     ProfileComponent,
-    AddReviewDialogComponent
+    AddReviewDialogComponent,
+    AlarmSnackComponent
   ],
-  entryComponents: [AddReviewDialogComponent],
+  entryComponents: [AddReviewDialogComponent, AlarmSnackComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -63,6 +65,7 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatIconModule,
     MatDialogModule,
+    MatSnackBarModule,
     AuthModule,
     FormsModule,
     RouterModule.forRoot(
