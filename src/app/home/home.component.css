@@ -1,5 +1,4 @@
 .course-card {
-  width: 800px;
   margin: 20px;
 }
 
@@ -8,7 +7,10 @@
 }
 
 .search-bar {
-  margin-top: 10px;
+  margin: 10px 0 0 16px;
+}
+.search-bar > * {
+  width: 225px;
 }
 
 
@@ -32,11 +34,15 @@
   font-size: 16px;
   font-weight: 500;
   display: list-item;
-  list-style: circle;
+  list-style: disc;
 }
 
 .tags-group{
   padding-left: 0px;
+}
+
+.tags-group > li {
+  margin: 8px 0 8px 0;
 }
 
 .instructor-avatar {
@@ -44,4 +50,24 @@
   width: 100px;
   margin-left: 10px;
   border: 1px solid #021a40;
+}
+
+.title {
+  font: 400 34px/40px Roboto,"Helvetica Neue",sans-serif;
+  margin: 20px 0 0 16px;
+}
+
+.subtitle {
+  font: 300 14px/24px Roboto,"Helvetica Neue",sans-serif;
+  margin: 0 0 0 16px;
+}
+
+.head-img {
+  margin: 20px 0 0 0;
+  width: 350px;
+  height: 150px;
+}
+
+mat-chip {
+  margin: 8px 0 0 8px !important;
 }

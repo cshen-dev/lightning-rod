@@ -1,7 +1,16 @@
-<div class="search-bar" fxLayoutAlign="center">
-  <mat-form-field>
-    <input matInput placeholder="Search Course Here">
-  </mat-form-field>
+<div fxLayout='row'>
+  <div fxFlex="70%">
+    <h1 class="title">Finding the right unit matters</h1>
+    <p class="subtitle">Want to hardcore skills or just take it easy, we want to help make every semester a good one.</p>
+    <div class="search-bar" fxLayoutAlign="left">
+      <mat-form-field>
+        <input matInput placeholder="Enter unit codes to find reviews">
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxFlex="20%">
+    <img class="head-img" src="../../../assets/img/discussion.jpg" alt="">
+  </div>
 </div>
 
 
@@ -36,6 +45,7 @@
             </div>
           </div>
           <div fxFlex="70%">
+            <p>This instructor has taught this course for </p>
             <ul class="tags-group">
               <li fxLayout='row wrap'>
                 <p class="tag-header" fxFlex="30%">
@@ -43,7 +53,7 @@
                 </p>
                 <div fxFlex="70%">
                   <mat-chip-list>
-                    <mat-chip (click)="addReview('workload', course, item.tag)" *ngFor="let item of course.workload"  selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                    <mat-chip (click)="addReview('workload', course, item.tag)" *ngFor="let item of course.workload" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
                     <mat-chip (click)="popReviewDialog('workload', course)">+</mat-chip>
                   </mat-chip-list>
                 </div>
@@ -54,7 +64,7 @@
                 </p>
                 <div fxFlex="70%">
                   <mat-chip-list>
-                    <mat-chip (click)="addReview('assignment', course, item.tag)" *ngFor="let item of course.assignment"  selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                    <mat-chip (click)="addReview('assignment', course, item.tag)" *ngFor="let item of course.assignment" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
                     <mat-chip (click)="popReviewDialog('assignment', course)">+</mat-chip>
                   </mat-chip-list>
                 </div>
@@ -66,7 +76,7 @@
                 <div fxFlex="70%">
                   <div fxFlex="70%">
                     <mat-chip-list>
-                      <mat-chip (click)="addReview('exam', course, item.tag)" *ngFor="let item of course.exam"  selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                      <mat-chip (click)="addReview('exam', course, item.tag)" *ngFor="let item of course.exam" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
                       <mat-chip (click)="popReviewDialog('exam', course)">+</mat-chip>
                     </mat-chip-list>
                   </div>
@@ -79,7 +89,7 @@
                 <div fxFlex="70%">
                   <div fxFlex="70%">
                     <mat-chip-list>
-                      <mat-chip (click)="addReview('programming', course, item.tag)" *ngFor="let item of course.programming"  selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                      <mat-chip (click)="addReview('programming', course, item.tag)" *ngFor="let item of course.programming" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
                       <mat-chip (click)="popReviewDialog('programming', course)">+</mat-chip>
                     </mat-chip-list>
                   </div>
@@ -91,7 +101,7 @@
                 </p>
                 <div fxFlex="70%">
                   <mat-chip-list>
-                    <mat-chip (click)="addReview('marking', course, item.tag)" *ngFor="let item of course.marking"  selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                    <mat-chip (click)="addReview('marking', course, item.tag)" *ngFor="let item of course.marking" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
                     <mat-chip (click)="popReviewDialog('marking', course)">+</mat-chip>
                   </mat-chip-list>
                 </div>
