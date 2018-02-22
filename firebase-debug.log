@@ -1,0 +1,45 @@
+[debug] [2018-02-10T14:42:43.433Z] ----------------------------------------------------------------------
+[debug] [2018-02-10T14:42:43.435Z] Command:       /usr/local/Cellar/node/8.9.1/bin/node /usr/local/bin/firebase deploy
+[debug] [2018-02-10T14:42:43.435Z] CLI Version:   3.16.0
+[debug] [2018-02-10T14:42:43.435Z] Platform:      darwin
+[debug] [2018-02-10T14:42:43.435Z] Node Version:  v8.9.1
+[debug] [2018-02-10T14:42:43.435Z] Time:          Sat Feb 10 2018 22:42:43 GMT+0800 (CST)
+[debug] [2018-02-10T14:42:43.436Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-10T14:42:43.447Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-10T14:42:43.447Z] > authorizing via signed-in user
+[debug] [2018-02-10T14:42:43.449Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-02-10T14:42:43.449Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/RSV67VESSvM9bwbbpH8MZEVYDQeS1YdNy0osE1dc4Cw',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sat Feb 10 2018 22:42:43 GMT+0800 (CST)
+[debug] [2018-02-10T14:42:44.262Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-10T14:42:44.275Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/lightning-rod-3b2f6  
+  
+ Sat Feb 10 2018 22:42:44 GMT+0800 (CST)
+[debug] [2018-02-10T14:42:45.369Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-10T14:42:45.370Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/lightning-rod-3b2f6/tokens  
+  
+ Sat Feb 10 2018 22:42:45 GMT+0800 (CST)
+[debug] [2018-02-10T14:42:46.735Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-10T14:46:15.911Z] ----------------------------------------------------------------------
+[debug] [2018-02-10T14:46:15.915Z] Command:       /usr/local/Cellar/node/8.9.1/bin/node /usr/local/bin/firebase deploy --debug
+[debug] [2018-02-10T14:46:15.915Z] CLI Version:   3.16.0
+[debug] [2018-02-10T14:46:15.915Z] Platform:      darwin
+[debug] [2018-02-10T14:46:15.915Z] Node Version:  v8.9.1
+[debug] [2018-02-10T14:46:15.916Z] Time:          Sat Feb 10 2018 22:46:15 GMT+0800 (CST)
+[debug] [2018-02-10T14:46:15.916Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-10T14:46:15.928Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-10T14:46:15.928Z] > authorizing via signed-in user
+[debug] [2018-02-10T14:46:15.930Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/lightning-rod-3b2f6  
+  
+ Sat Feb 10 2018 22:46:15 GMT+0800 (CST)
+[debug] [2018-02-10T14:46:16.939Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-10T14:46:16.940Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/lightning-rod-3b2f6/tokens  
+  
+ Sat Feb 10 2018 22:46:16 GMT+0800 (CST)
+[debug] [2018-02-10T14:46:18.191Z] <<< HTTP RESPONSE 200

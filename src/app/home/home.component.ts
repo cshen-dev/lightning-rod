@@ -66,6 +66,7 @@ export class HomeComponent implements OnInit {
 
   loadCoursesList() {
     const courseInfoSubscription = this._coursesService.getCoursesInfo().subscribe(courses => {
+      console.log(courses);
       courses.forEach(course => { this.loadCourseReview(course); });
     });
     this.subscriptions.push(courseInfoSubscription);
@@ -205,7 +206,7 @@ export class HomeComponent implements OnInit {
 
       this.parseReviews(newCourseViewModel, reviews);
 
-      this.courses.splice(0, this.courses.length);
+      // this.courses.splice(0, this.courses.length);
       this.courses.push(newCourseViewModel);
     });
     this.subscriptions.push(reviewSubscription);

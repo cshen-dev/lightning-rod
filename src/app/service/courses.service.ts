@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 
 import { AuthService } from '../auth/auth.service';
+import { courses, reviews } from '../seed/data';
 
 export interface CourseInfo {
   code: string;
@@ -52,7 +53,7 @@ export class CoursesService {
 
   public getCoursesInfo(): Observable<CourseInfo[]> {
     return this.afs
-      .collection<CourseInfo>('courses')
+      .collection<CourseInfo>('courses2')
       .snapshotChanges()
       .map(actions => {
         return actions.map(action => {
@@ -65,7 +66,7 @@ export class CoursesService {
 
   public getCourseReviews(courseId, version): Observable<Review[]> {
     return this.afs
-      .collection('courses')
+      .collection('courses2')
       .doc(courseId)
       .collection<Review>('reviews', ref => ref.where('instructor', '==', version))
       .valueChanges();
@@ -73,6 +74,7 @@ export class CoursesService {
 
 
   public createSeedData() {
+    console.log('start inject...');
 
     const creator = {} as ReviewCreator;
 
@@ -83,69 +85,20 @@ export class CoursesService {
       creator.displayName = user.displayName;
     });
 
-    const newCourseInfo = {} as CourseInfo;
-    newCourseInfo.code = 'COMP5347';
-    newCourseInfo.institute = 'USYD';
-    newCourseInfo.lastUpdatedAt = new Date();
-    newCourseInfo.logo = `url('../../../assets/img/usyd.png')`;
-    newCourseInfo.versions = [{
-      createdAt: new Date('Mar 25 2018'),
-      name: 'Web Application Development',
-      avatar: '../../../assets/instructors/ying_zhou.png',
-      semesters: ['2018S1', '2017S2'],
-      instructor: 'Dr Zhou, Ying'
-    }, {
-      createdAt: new Date('Mar 25 2017'),
-      name: 'Web Application Development',
-      avatar: '../../../assets/instructors/ying_zhou.png',
-      semesters: ['2017S1', '2016S2'],
-      instructor: 'Dr Uwe'
-    }];
-    this.afs
-      .collection('courses')
-      .add(newCourseInfo)
-      .then(ref => {
-        const newReview = {} as Review;
-        newReview.category = 'workload';
-        newReview.tag = '还行';
-        newReview.createdAt = new Date();
-        newReview.createdBy = creator;
-        newReview.instructor = 'Dr Zhou, Ying';
-        ref.collection('reviews').add(newReview);
-
-
-        const newReview2 = {} as Review;
-        newReview.category = 'exam';
-        newReview.tag = '考试比较难';
-        newReview.createdAt = new Date();
-        newReview.createdBy = creator;
-        newReview.instructor = 'Dr Zhou, Ying';
-        ref.collection('reviews').add(newReview);
-
-        const newReview3 = {} as Review;
-        newReview.category = 'assignment';
-        newReview.tag = '比较实用';
-        newReview.createdAt = new Date();
-        newReview.createdBy = creator;
-        newReview.instructor = 'Dr Zhou, Ying';
-        ref.collection('reviews').add(newReview);
-
-        const newReview4 = {} as Review;
-        newReview.category = 'programming';
-        newReview.tag = '需要编程';
-        newReview.createdAt = new Date();
-        newReview.createdBy = creator;
-        newReview.instructor = 'Dr Zhou, Ying';
-        ref.collection('reviews').add(newReview);
-
-        const newReview5 = {} as Review;
-        newReview.category = 'marking';
-        newReview.tag = '分低';
-        newReview.createdAt = new Date();
-        newReview.createdBy = creator;
-        newReview.instructor = 'Dr Zhou, Ying';
-        ref.collection('reviews').add(newReview);
-      });
+    courses.forEach( eachCourse => {
+      this.afs
+        .collection('courses2')
+        .add(eachCourse)
+        .then(ref => {
+          eachCourse.versions.forEach( eachVersion => {
+            reviews.forEach( eachReview => {
+              eachReview.instructor = eachVersion.instructor;
+              eachReview.createdBy = creator;
+              ref.collection('reviews').add(eachReview);
+            });
+          });
+        });
+    };
   }
 
   public addReviews(courseId, newReview) {
