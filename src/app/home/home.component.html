@@ -3,9 +3,11 @@
     <h1 class="title">Finding the right unit matters</h1>
     <p class="subtitle">Want to hardcore skills or just take it easy, we want to help make every semester a good one.</p>
     <div class="search-bar" fxLayoutAlign="left">
-      <mat-form-field>
-        <input matInput (keyup.enter)="chooseCourse()" [(ngModel)]="code" placeholder="Enter unit codes to find reviews">
-      </mat-form-field>
+      <div matTooltip="Click Enter to Search" [matTooltipPosition]="tooltipPos">
+        <mat-form-field>
+          <input matInput (keyup.enter)="chooseCourse()" [(ngModel)]="code" placeholder="Enter unit codes to find reviews">
+        </mat-form-field>
+      </div>
     </div>
   </div>
   <div fxFlex="20%">

@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { environment } from './../environments/environment';
 
 import { AuthModule } from './auth/auth.module';
@@ -66,6 +67,7 @@ const appRoutes: Routes = [
     MatIconModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatTooltipModule,
     AuthModule,
     FormsModule,
     RouterModule.forRoot(

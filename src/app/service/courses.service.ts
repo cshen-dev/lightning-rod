@@ -97,7 +97,7 @@ export class CoursesService {
             reviews.forEach( eachReview => {
               eachReview.instructor = eachVersion.instructor;
               eachReview.createdBy = creator.uid;
-              ref.collection(courseReviewCollectionName).add(eachReview);
+              ref.collection(this.courseReviewCollectionName).add(eachReview);
             });
           });
         });

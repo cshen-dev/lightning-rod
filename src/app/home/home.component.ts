@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   private subscriptions: Array<Subscription> = [];
   private versionPreference: Map<string, Date> = new Map();
   code: string;
+  tooltipPos = 'below';
 
   constructor(
     private authService: AuthService,

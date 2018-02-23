@@ -9,7 +9,7 @@
 .search-bar {
   margin: 10px 0 0 16px;
 }
-.search-bar > * {
+.search-bar mat-form-field {
   width: 225px;
 }
 

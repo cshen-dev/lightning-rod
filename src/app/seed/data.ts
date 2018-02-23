@@ -5,16 +5,16 @@ export const courses = [
     lastUpdatedAt: new Date(),
     logo: `url('../../../assets/img/usyd.png')`,
     versions: [{
-        createdAt: new Date('Mar 25 2018'),
-        name: 'Web Application Development',
-        avatar: '../../../assets/instructors/unknown.png',
-        semesters: ['2018S1'],
-        instructor: 'Suleiman, Basem'
-      },{
+      createdAt: new Date('Mar 25 2018'),
+      name: 'Web Application Development',
+      avatar: '../../../assets/instructors/unknown.png',
+      semesters: ['2018S1'],
+      instructor: 'Suleiman, Basem'
+    }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Web Application Development',
       avatar: '../../../assets/instructors/Ying Zhou.png',
-      semesters: ['2017S1','2016S1','2015S1'],
+      semesters: ['2017S1', '2016S1', '2015S1'],
       instructor: 'Dr Zhou, Ying'
     }]
   },
@@ -27,13 +27,13 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Professional Practice in IT',
       avatar: '../../../assets/instructors/unknown.png',
-      semesters: ['2018S2','2018S1','2017S2', '2017S1', '2016S2', '2016S1'],
+      semesters: ['2018S2', '2018S1', '2017S2', '2017S1', '2016S2', '2016S1'],
       instructor: 'Dr Vaghjiani, Khimji'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Professional Practice in IT',
       avatar: '../../../assets/instructors/Takatsuka, Masahiro.png',
-      semesters: ['2018S2','2017S2', '2017S1', '2016S2', '2016S1'],
+      semesters: ['2018S2', '2017S2', '2017S1', '2016S2', '2016S1'],
       instructor: 'Dr Takatsuka, Masahiro'
     }, {
       createdAt: new Date('Mar 25 2018'),
@@ -63,7 +63,7 @@ export const courses = [
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Project Management in IT',
-      avatar: '../../../assets/instructors/Sommer, Steven.png',
+      avatar: '../../../assets/instructors/unknown.png',
       semesters: ['2016S1', '2016S2', '2015S2', '2015S1', '2014S2'],
       instructor: 'Dr Sommer, Steven'
     }]
@@ -77,13 +77,13 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Understanding IT Innovations',
       avatar: '../../../assets/instructors/Kim, Jinman.png',
-      semesters: ['2018S2', '2018S1','2017S1', '2017S2','2016S2'],
+      semesters: ['2018S2', '2018S1', '2017S1', '2017S2', '2016S2'],
       instructor: 'Dr Kim, Jinman'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Understanding IT Innovations',
       avatar: '../../../assets/instructors/unknown.png',
-      semesters: ['2016S1', '2015S2','2015S1'],
+      semesters: ['2016S1', '2015S2', '2015S1'],
       instructor: 'Simpson-Young, Bill'
     }]
   },
@@ -129,13 +129,13 @@ export const courses = [
       avatar: '../../../assets/instructors/Ying Zhou.png',
       semesters: ['2016S1'],
       instructor: 'Dr Zhou, Ying'
-    },{
-        createdAt: new Date('Mar 25 2018'),
-        name: 'Enterprise Scale Software Architecture',
-        avatar: '../../../assets/instructors/Fekete, Alan.png',
-        semesters: ['2015S1'],
-        instructor: 'Prof Fekete, Alan'
-      }]
+    }, {
+      createdAt: new Date('Mar 25 2018'),
+      name: 'Enterprise Scale Software Architecture',
+      avatar: '../../../assets/instructors/Fekete, Alan.png',
+      semesters: ['2015S1'],
+      instructor: 'Prof Fekete, Alan'
+    }]
   },
   {
     code: 'COMP5349',
@@ -146,13 +146,13 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Cloud Computing',
       avatar: '../../../assets/instructors/Ying Zhou.png',
-      semesters: ['2018S1','2016S1'],
+      semesters: ['2018S1', '2016S1'],
       instructor: 'Dr Zhou, Ying'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Cloud Computing',
       avatar: '../../../assets/instructors/Roehm, Uwe.png',
-      semesters: ['2017S1','2015S1'],
+      semesters: ['2017S1', '2015S1'],
       instructor: 'Prof Roehm, Uwe'
     }]
   },
@@ -165,7 +165,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Software Quality Engineering',
       avatar: '../../../assets/instructors/Yuan, Dong.png',
-      semesters: ['2018S1','2016S1'],
+      semesters: ['2018S1', '2016S1'],
       instructor: 'Dr Yuan, Dong'
     }, {
       createdAt: new Date('Mar 25 2017'),
@@ -184,7 +184,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Machine Learning and Data Mining',
       avatar: '../../../assets/instructors/Fabio, Ramos.png',
-      semesters: ['2018S1', '2017S1','2016S1', '2015S1'],
+      semesters: ['2018S1', '2017S1', '2016S1', '2015S1'],
       instructor: 'Prof Fabio, Ramos'
     }]
   },
@@ -197,7 +197,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Multimedia Retrieval',
       avatar: '../../../assets/instructors/Wang, Zhiyong.png',
-      semesters: ['2018S1', '2017S1','2016S1', '2015S1'],
+      semesters: ['2018S1', '2017S1', '2016S1', '2015S1'],
       instructor: 'Dr Wang, Zhiyong'
     }]
   },
@@ -210,13 +210,13 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Natural Language Processing',
       avatar: '../../../assets/instructors/Fekete, Alan.png',
-      semesters: ['2018S1','2016S1'],
+      semesters: ['2018S1', '2016S1'],
       instructor: 'Prof Fekete, Alan'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Natural Language Processing',
       avatar: '../../../assets/instructors/unknown.png',
-      semesters: ['2018S1','2017S1'],
+      semesters: ['2018S1', '2017S1'],
       instructor: 'Dr Nothman, Joel'
     }, {
       createdAt: new Date('Mar 25 2018'),
@@ -248,7 +248,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Computational Geometry',
       avatar: '../../../assets/instructors/Gudmundsson, Joachim.png',
-      semesters: ['2018S1', '2017S1','2016S1', '2015S1'],
+      semesters: ['2018S1', '2017S1', '2016S1', '2015S1'],
       instructor: 'Dr Gudmundsson, Joachim'
     }]
   },
@@ -261,7 +261,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Information Technology in Biomedicine',
       avatar: '../../../assets/instructors/Cai, Tom.png',
-      semesters: ['2018S1', '2017S1','2016S1', '2015S1'],
+      semesters: ['2018S1', '2017S1', '2016S1', '2015S1'],
       instructor: 'Dr Cai, Tom (Weidong)'
     }]
   },
@@ -274,7 +274,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Computer and Network Security',
       avatar: '../../../assets/instructors/Leong, Philip.png',
-      semesters: ['2018S1', '2017S1','2016S1', '2015S1'],
+      semesters: ['2018S1', '2017S1', '2016S1', '2015S1'],
       instructor: 'Prof Leong, Philip'
     }]
   },
@@ -287,7 +287,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Enterprise Healthcare Information Systems',
       avatar: '../../../assets/instructors/Kim, Jinman.png',
-      semesters: ['2018S2', '2017S2','2016S2', '2015S2' ],
+      semesters: ['2018S2', '2017S2', '2016S2', '2015S2'],
       instructor: 'Dr Kim, Jinman'
     }, {
       createdAt: new Date('Mar 25 2018'),
@@ -318,13 +318,13 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Information Security Management',
       avatar: '../../../assets/instructors/unknown.png',
-      semesters: ['2017S1','2016S1'],
+      semesters: ['2017S1', '2016S1'],
       instructor: 'Mr. Sardesai, Sandeep'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Information Security Management',
       avatar: '../../../assets/instructors/Fekete, Alan.png',
-      semesters: ['2016S1','2015S1'],
+      semesters: ['2016S1', '2015S1'],
       instructor: 'Prof Fekete, Alan'
     }]
   },
@@ -337,13 +337,13 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Services Science Management and Engineering',
       avatar: '../../../assets/instructors/unknown.png',
-      semesters: ['2018S2', '2018S1','2017S2', '2017S1','2016S2','2015S2','2015S1'],
+      semesters: ['2018S2', '2018S1', '2017S2', '2017S1', '2016S2', '2015S2', '2015S1'],
       instructor: 'Dr Stern, Andrea'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Services Science Management and Engineering',
       avatar: '../../../assets/instructors/Davis, Joseph.png',
-      semesters: ['2018S2', '2018S1','2017S2','2016S2', '2016S1','2015S1'],
+      semesters: ['2018S2', '2018S1', '2017S2', '2016S2', '2016S1', '2015S1'],
       instructor: 'Professor Davis, Joseph'
     }]
   },
@@ -356,7 +356,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Knowledge Management Systems',
       avatar: '../../../assets/instructors/Davis, Joseph.png',
-      semesters: ['2018S1', '2017S1','2016S1', '2015S1'],
+      semesters: ['2018S1', '2017S1', '2016S1', '2015S1'],
       instructor: 'Professor Davis, Joseph'
     }]
   },
@@ -369,13 +369,13 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Change Management in IT',
       avatar: '../../../assets/instructors/Poon, Simon.png',
-      semesters: ['2018W', '2017W','2016W', '2015W'],//W referes to winter semester
+      semesters: ['2018W', '2017W', '2016W', '2015W'], // W referes to winter semester
       instructor: 'A/Prof Poon, Simon'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Change Management in IT',
       avatar: '../../../assets/instructors/Davis, Joseph.png',
-      semesters: [ '2015W'],//W referes to winter semester
+      semesters: ['2015W'], // W referes to winter semester
       instructor: 'Professor Davis, Joseph'
     }]
   },
@@ -413,7 +413,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Algorithms',
       avatar: '../../../assets/instructors/Gudmundsson, Joachim.png',
-      semesters: ['2018S2','2017S1','2016S1'],
+      semesters: ['2018S2', '2017S1', '2016S1'],
       instructor: 'Dr Gudmundsson, Joachim'
     }, {
       createdAt: new Date('Mar 25 2018'),
@@ -421,19 +421,19 @@ export const courses = [
       avatar: '../../../assets/instructors/unknown.png',
       semesters: ['2017S2'],
       instructor: 'Godbehere, Joseph William'
-    },{
-        createdAt: new Date('Mar 25 2018'),
-        name: 'Algorithms',
-        avatar: '../../../assets/instructors/HoseinyFarahabady, M. Reza.png',
-        semesters: ['2016S2'],
-        instructor: 'HoseinyFarahabady, M. Reza'
-      },{
-        createdAt: new Date('Mar 25 2018'),
-        name: 'Algorithms',
-        avatar: '../../../assets/instructors/Mestre, Julian.png',
-        semesters: ['2015S2'],
-        instructor: 'Dr Mestre, Julian'
-      }]
+    }, {
+      createdAt: new Date('Mar 25 2018'),
+      name: 'Algorithms',
+      avatar: '../../../assets/instructors/HoseinyFarahabady, M. Reza.png',
+      semesters: ['2016S2'],
+      instructor: 'HoseinyFarahabady, M. Reza'
+    }, {
+      createdAt: new Date('Mar 25 2018'),
+      name: 'Algorithms',
+      avatar: '../../../assets/instructors/Mestre, Julian.png',
+      semesters: ['2015S2'],
+      instructor: 'Dr Mestre, Julian'
+    }]
   },
   {
     code: 'COMP9103',
@@ -450,21 +450,21 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Software Development in Java',
       avatar: '../../../assets/instructors/unknown.png',
-      semesters: ['2018S2', '2017S2','2016S2','2016S1','2015S2','2015S1'],
+      semesters: ['2018S2', '2017S2', '2016S2', '2016S1', '2015S2', '2015S1'],
       instructor: 'Dr Wang, Xiu Ying'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Software Development in Java',
       avatar: '../../../assets/instructors/unknown.png',
-      semesters: ['2017S1', '2015S1',],
+      semesters: ['2017S1', '2015S1'],
       instructor: 'Dr Cui, Hui'
-    },{
-        createdAt: new Date('Mar 25 2018'),
-        name: 'Software Development in Java',
-        avatar: '../../../assets/instructors/Feng, David.png',
-        semesters: ['2016S1', '2015S1'],
-        instructor: 'Prof Feng, David'
-      }]
+    }, {
+      createdAt: new Date('Mar 25 2018'),
+      name: 'Software Development in Java',
+      avatar: '../../../assets/instructors/Feng, David.png',
+      semesters: ['2016S1', '2015S1'],
+      instructor: 'Prof Feng, David'
+    }]
   },
   {
     code: 'COMP9110',
@@ -475,7 +475,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'System Analysis and Modelling',
       avatar: '../../../assets/instructors/Chung, Vera.png',
-      semesters: ['2018S2', '2018S1','2017S2', '2017S1','2016S2', '2016S1','2015S2'],
+      semesters: ['2018S2', '2018S1', '2017S2', '2017S1', '2016S2', '2016S1', '2015S2'],
       instructor: 'Dr Chung, Vera'
     }]
   },
@@ -494,7 +494,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Database Management Systems',
       avatar: '../../../assets/instructors/unknown.png',
-      semesters: ['2018S1','2017S2','2016S2','2015S2'],
+      semesters: ['2018S1', '2017S2', '2016S2', '2015S2'],
       instructor: 'Dr Sladescu, Matthew'
     }, {
       createdAt: new Date('Mar 25 2018'),
@@ -502,19 +502,19 @@ export const courses = [
       avatar: '../../../assets/instructors/Fekete, Alan.png',
       semesters: ['2017S2'],
       instructor: 'Prof Fekete, Alan'
-    },{
-        createdAt: new Date('Mar 25 2018'),
-        name: 'Database Management Systems',
-        avatar: '../../../assets/instructors/unknown.png',
-        semesters: ['2017S1','2016S1'],
-        instructor: 'Dr Jeffries, Bryn'
-      },{
-        createdAt: new Date('Mar 25 2018'),
-        name: 'Database Management Systems',
-        avatar: '../../../assets/instructors/Roehm, Uwe.png',
-        semesters: ['2015S1'],
-        instructor: 'A/Prof Roehm, Uwe'
-      }]
+    }, {
+      createdAt: new Date('Mar 25 2018'),
+      name: 'Database Management Systems',
+      avatar: '../../../assets/instructors/unknown.png',
+      semesters: ['2017S1', '2016S1'],
+      instructor: 'Dr Jeffries, Bryn'
+    }, {
+      createdAt: new Date('Mar 25 2018'),
+      name: 'Database Management Systems',
+      avatar: '../../../assets/instructors/Roehm, Uwe.png',
+      semesters: ['2015S1'],
+      instructor: 'A/Prof Roehm, Uwe'
+    }]
   },
   {
     code: 'COMP9121',
@@ -525,13 +525,13 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Design of Networks & Distributed Systems',
       avatar: '../../../assets/instructors/Bao, Wei.png',
-      semesters: ['2018S2', '2017S2','2016S2'],
+      semesters: ['2018S2', '2017S2', '2016S2'],
       instructor: 'Dr Bao, Wei'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Design of Networks & Distributed Systems',
       avatar: '../../../assets/instructors/Holz, Ralph.png',
-      semesters: ['2017S2','2016S2'],
+      semesters: ['2017S2', '2016S2'],
       instructor: 'Dr Holz, Ralph'
     }]
   },
@@ -544,19 +544,19 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Information Technology for Health Professionals',
       avatar: '../../../assets/instructors/Poon, Josiah.png',
-      semesters: ['2018S2','2017S2','2016S2','2015S2'],
+      semesters: ['2018S2', '2017S2', '2016S2', '2015S2'],
       instructor: 'Dr Poon, Josiah'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Information Technology for Health Professionals',
       avatar: '../../../assets/instructors/Poon, Simon.png',
-      semesters: ['2018S2','2017S2','2016S2','2015S2'],
+      semesters: ['2018S2', '2017S2', '2016S2', '2015S2'],
       instructor: 'A/Prof Poon, Simon'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Information Technology for Health Professionals',
       avatar: '../../../assets/instructors/unknown.png',
-      semesters: ['2018S2','2016S2','2015S2'],
+      semesters: ['2018S2', '2016S2', '2015S2'],
       instructor: 'Dr Loy, Clement'
     }]
   },
@@ -575,7 +575,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Mobile Computing',
       avatar: '../../../assets/instructors/Wang, Zhiyong.png',
-      semesters: ['2018S2','2017S2','2016S2',],
+      semesters: ['2018S2', '2017S2', '2016S2'],
       instructor: 'Dr Wang, Zhiyong'
     }, {
       createdAt: new Date('Mar 25 2018'),
@@ -583,13 +583,13 @@ export const courses = [
       avatar: '../../../assets/instructors/Feng, David.png',
       semesters: ['2015S2'],
       instructor: 'Prof Feng, David'
-    },{
-        createdAt: new Date('Mar 25 2018'),
-        name: 'Mobile Computing',
-        avatar: '../../../assets/instructors/Cai, Tom.png',
-        semesters: ['2015S2'],
-        instructor: 'Dr Cai, Tom (Weidong)'
-      }]
+    }, {
+      createdAt: new Date('Mar 25 2018'),
+      name: 'Mobile Computing',
+      avatar: '../../../assets/instructors/Cai, Tom.png',
+      semesters: ['2015S2'],
+      instructor: 'Dr Cai, Tom (Weidong)'
+    }]
   },
   {
     code: 'COMP5427',
@@ -600,7 +600,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Usability Engineering',
       avatar: '../../../assets/instructors/Kay, Judy.png',
-      semesters: ['2018S2','2017S2','2016S2','2015S2'],
+      semesters: ['2018S2', '2017S2', '2016S2', '2015S2'],
       instructor: 'Professor Kay, Judy'
     }]
   },
@@ -619,7 +619,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Object Oriented Application Frameworks',
       avatar: '../../../assets/instructors/Yuan, Dong.png',
-      semesters: ['2017S2','2016S2'],
+      semesters: ['2017S2', '2016S2'],
       instructor: 'Dr Yuan, Dong'
     }, {
       createdAt: new Date('Mar 25 2018'),
@@ -638,7 +638,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Model Based Software Engineering',
       avatar: '../../../assets/instructors/Yuan, Dong.png',
-      semesters: ['2018S2','2017S2','2016S2','2015S2'],
+      semesters: ['2018S2', '2017S2', '2016S2', '2015S2'],
       instructor: 'Dr Yuan, Dong'
     }]
   },
@@ -651,13 +651,13 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Pervasive Computing',
       avatar: '../../../assets/instructors/Kay, Judy.png',
-      semesters: ['2018S2','2017S2','2016S2','2015S2'],
+      semesters: ['2018S2', '2017S2', '2016S2', '2015S2'],
       instructor: 'Professor Kay, Judy'
     }, {
       createdAt: new Date('Mar 25 2018'),
       name: 'Pervasive Computing',
       avatar: '../../../assets/instructors/Kummerfeld, Bob.png',
-      semesters: ['2017S2','2015S2'],
+      semesters: ['2017S2', '2015S2'],
       instructor: 'A/Prof Kummerfeld, Bob'
     }]
   },
@@ -670,7 +670,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Advanced Network Technologies',
       avatar: '../../../assets/instructors/Bao, Wei.png',
-      semesters: ['2018S2','2017S2','2016S2'],
+      semesters: ['2018S2', '2017S2', '2016S2'],
       instructor: 'Dr Bao, Wei'
     }, {
       createdAt: new Date('Mar 25 2018'),
@@ -689,7 +689,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Networked Embedded Systems',
       avatar: '../../../assets/instructors/Lin, Zihuai.png',
-      semesters: ['2018S2','2017S2','2016S2','2015S2'],
+      semesters: ['2018S2', '2017S2', '2016S2', '2015S2'],
       instructor: 'Dr Lin, Zihuai'
     }]
   },
@@ -702,7 +702,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Software Defined Networks',
       avatar: '../../../assets/instructors/Yuan, Dong.png',
-      semesters: ['2018S2','2017S2'],
+      semesters: ['2018S2', '2017S2'],
       instructor: 'Dr Yuan, Dong'
     }]
   },
@@ -715,7 +715,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Advanced Data Models',
       avatar: '../../../assets/instructors/Ying Zhou.png',
-      semesters: ['2018S2','2017S2','2016S2','2015S2'],
+      semesters: ['2018S2', '2017S2', '2016S2', '2015S2'],
       instructor: 'Dr Zhou, Ying'
     }]
   },
@@ -728,7 +728,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Visual Analytics',
       avatar: '../../../assets/instructors/Hong, SeokHee.png',
-      semesters: ['2018S2','2017S2','2015S2'],
+      semesters: ['2018S2', '2017S2', '2015S2'],
       instructor: 'Professor Hong, SeokHee'
     }, {
       createdAt: new Date('Mar 25 2018'),
@@ -747,7 +747,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Data Analytics and Business Intelligence',
       avatar: '../../../assets/instructors/Louie, Darren.png',
-      semesters: ['2018S','2017S','2016S','2015S'],// S refers to summer school
+      semesters: ['2018S', '2017S', '2016S', '2015S'], // S refers to summer school
       instructor: 'Louie, Darren'
     }]
   },
@@ -760,7 +760,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Multimedia Design and Authoring',
       avatar: '../../../assets/instructors/unknown.png',
-      semesters: ['2018S2','2017S2','2016S2','2015S2'],
+      semesters: ['2018S2', '2017S2', '2016S2', '2015S2'],
       instructor: 'Dr Wang, Xiu Ying'
     }]
   },
@@ -773,7 +773,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Signals, Software and Health',
       avatar: '../../../assets/instructors/Yuan, Dong.png',
-      semesters: ['2018S2','2017S2','2016S2','2015S2'],
+      semesters: ['2018S2', '2017S2', '2016S2', '2015S2'],
       instructor: 'Dr Yuan, Dong'
     }]
   },
@@ -786,7 +786,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Empirical Security Analysis and Engineering',
       avatar: '../../../assets/instructors/Holz, Ralph.png',
-      semesters: ['2018S2','2017S2'],
+      semesters: ['2018S2', '2017S2'],
       instructor: 'Dr Holz, Ralph'
     }]
   },
@@ -818,7 +818,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Advanced Topics in IT Project Management',
       avatar: '../../../assets/instructors/Wong, Bernard.png',
-      semesters: ['2018S2','2017S2','2016S2'],
+      semesters: ['2018S2', '2017S2', '2016S2'],
       instructor: 'Dr Wong, Bernard'
     }, {
       createdAt: new Date('Mar 25 2018'),
@@ -837,7 +837,7 @@ export const courses = [
       createdAt: new Date('Mar 25 2018'),
       name: 'Information Technology Strategy & Value',
       avatar: '../../../assets/instructors/Liu, Na.png',
-      semesters: ['2018S2','2017S2','2017S1','2016S2','2016S1'],
+      semesters: ['2018S2', '2017S2', '2017S1', '2016S2', '2016S1'],
       instructor: 'Dr Liu, Na'
     }, {
       createdAt: new Date('Mar 25 2018'),
