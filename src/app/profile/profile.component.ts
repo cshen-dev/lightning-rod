@@ -10,7 +10,7 @@ import { CoursesService } from '../service/courses.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private authService: AuthService
+  constructor(private authService: AuthService,
     private coursesService: CoursesService) { }
 
   displayName: string;

@@ -50,10 +50,14 @@ export class CoursesService {
     this.user = authService.currentUserObservable;
   }
 
+  private coursesCollectionName = 'courses2';
+  private courseReviewCollectionName = 'reviews';
 
-  public getCoursesInfo(): Observable<CourseInfo[]> {
+
+  public getCoursesInfo(code): Observable<CourseInfo[]> {
+    code = code.toUpperCase();
     return this.afs
-      .collection<CourseInfo>('courses2')
+      .collection<CourseInfo>(this.coursesCollectionName, ref => ref.where('code', '==', code))
       .snapshotChanges()
       .map(actions => {
         return actions.map(action => {
@@ -66,12 +70,11 @@ export class CoursesService {
 
   public getCourseReviews(courseId, version): Observable<Review[]> {
     return this.afs
-      .collection('courses2')
+      .collection(this.coursesCollectionName)
       .doc(courseId)
-      .collection<Review>('reviews', ref => ref.where('instructor', '==', version))
+      .collection<Review>(this.courseReviewCollectionName, ref => ref.where('instructor', '==', version))
       .valueChanges();
   }
-
 
   public createSeedData() {
     console.log('start inject...');
@@ -87,25 +90,26 @@ export class CoursesService {
 
     courses.forEach( eachCourse => {
       this.afs
-        .collection('courses2')
+        .collection(this.coursesCollectionName)
         .add(eachCourse)
         .then(ref => {
           eachCourse.versions.forEach( eachVersion => {
             reviews.forEach( eachReview => {
               eachReview.instructor = eachVersion.instructor;
-              eachReview.createdBy = creator;
-              ref.collection('reviews').add(eachReview);
+              eachReview.createdBy = creator.uid;
+              ref.collection(courseReviewCollectionName).add(eachReview);
             });
           });
         });
-    };
+    });
   }
 
   public addReviews(courseId, newReview) {
+    console.log('in addreview service...');
     return this.afs
-      .collection('courses')
+      .collection(this.coursesCollectionName)
       .doc(courseId)
-      .collection('reviews')
+      .collection(this.courseReviewCollectionName)
       .add(newReview);
   }
 

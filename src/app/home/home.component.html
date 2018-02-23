@@ -4,7 +4,7 @@
     <p class="subtitle">Want to hardcore skills or just take it easy, we want to help make every semester a good one.</p>
     <div class="search-bar" fxLayoutAlign="left">
       <mat-form-field>
-        <input matInput placeholder="Enter unit codes to find reviews">
+        <input matInput (keyup.enter)="chooseCourse()" [(ngModel)]="code" placeholder="Enter unit codes to find reviews">
       </mat-form-field>
     </div>
   </div>
@@ -25,7 +25,7 @@
       </mat-card-header>
       <mat-card-content>
         <div fxLayout='row wrap'>
-          <div fxFlex="30%">
+          <div fxFlex="20%">
             <div class="semester-selector">
               <button mat-icon-button [matMenuTriggerFor]="semester">
                 {{course.instructor}}
@@ -44,14 +44,14 @@
               <img src="{{course.avatar}}" class="instructor-avatar" alt="">
             </div>
           </div>
-          <div fxFlex="70%">
+          <div fxFlex="80%">
             <p>This instructor has taught this course for {{course.semester}}</p>
             <ul class="tags-group">
               <li fxLayout='row wrap'>
-                <p class="tag-header" fxFlex="30%">
+                <p class="tag-header" fxFlex="15%">
                   Work Load
                 </p>
-                <div fxFlex="70%">
+                <div fxFlex="85%">
                   <mat-chip-list>
                     <mat-chip (click)="addReview('workload', course, item.tag)" *ngFor="let item of course.workload" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
                     <mat-chip (click)="popReviewDialog('workload', course)">+</mat-chip>
@@ -59,10 +59,10 @@
                 </div>
               </li>
               <li fxLayout='row wrap'>
-                <p class="tag-header" fxFlex="30%">
+                <p class="tag-header" fxFlex="15%">
                   Assignment
                 </p>
-                <div fxFlex="70%">
+                <div fxFlex="85%">
                   <mat-chip-list>
                     <mat-chip (click)="addReview('assignment', course, item.tag)" *ngFor="let item of course.assignment" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
                     <mat-chip (click)="popReviewDialog('assignment', course)">+</mat-chip>
@@ -70,36 +70,32 @@
                 </div>
               </li>
               <li fxLayout='row wrap'>
-                <p class="tag-header" fxFlex="30%">
+                <p class="tag-header" fxFlex="15%">
                   Exam
                 </p>
-                <div fxFlex="70%">
-                  <div fxFlex="70%">
+                <div fxFlex="85%">
                     <mat-chip-list>
                       <mat-chip (click)="addReview('exam', course, item.tag)" *ngFor="let item of course.exam" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
                       <mat-chip (click)="popReviewDialog('exam', course)">+</mat-chip>
                     </mat-chip-list>
-                  </div>
                 </div>
               </li>
               <li fxLayout='row wrap'>
-                <p class="tag-header" fxFlex="30%">
+                <p class="tag-header" fxFlex="15%">
                   Programming
                 </p>
-                <div fxFlex="70%">
-                  <div fxFlex="70%">
+                <div fxFlex="85%">
                     <mat-chip-list>
                       <mat-chip (click)="addReview('programming', course, item.tag)" *ngFor="let item of course.programming" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
                       <mat-chip (click)="popReviewDialog('programming', course)">+</mat-chip>
                     </mat-chip-list>
-                  </div>
                 </div>
               </li>
               <li fxLayout='row wrap'>
-                <p class="tag-header" fxFlex="30%">
+                <p class="tag-header" fxFlex="15%">
                   Marking
                 </p>
-                <div fxFlex="70%">
+                <div fxFlex="85%">
                   <mat-chip-list>
                     <mat-chip (click)="addReview('marking', course, item.tag)" *ngFor="let item of course.marking" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
                     <mat-chip (click)="popReviewDialog('marking', course)">+</mat-chip>

@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
   currentCourseReviewer: ReviewCreator;
   private subscriptions: Array<Subscription> = [];
   private versionPreference: Map<string, Date> = new Map();
+  code: string;
 
   constructor(
     private authService: AuthService,
@@ -65,7 +66,10 @@ export class HomeComponent implements OnInit {
   }
 
   loadCoursesList() {
-    const courseInfoSubscription = this._coursesService.getCoursesInfo().subscribe(courses => {
+    if (!this.code ) {
+      return;
+    }
+    const courseInfoSubscription = this._coursesService.getCoursesInfo(this.code).subscribe(courses => {
       console.log(courses);
       courses.forEach(course => { this.loadCourseReview(course); });
     });
@@ -113,6 +117,7 @@ export class HomeComponent implements OnInit {
   }
 
   public tuneVersionPriority(instructor) {
+    console.log('trigger tune priority');
     this.versionPreference.set(instructor, new Date());
 
     this.subscriptions.forEach(item => {
@@ -206,7 +211,7 @@ export class HomeComponent implements OnInit {
 
       this.parseReviews(newCourseViewModel, reviews);
 
-      // this.courses.splice(0, this.courses.length);
+      this.courses.splice(0, this.courses.length);
       this.courses.push(newCourseViewModel);
     });
     this.subscriptions.push(reviewSubscription);
@@ -230,10 +235,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addSeed() {
-    this._coursesService.createSeedData();
-  }
-
   checkIsLogedIn() {
     if (this.currentCourseReviewer) {
       return true;
@@ -243,6 +244,7 @@ export class HomeComponent implements OnInit {
   }
 
   addReview(category, course, tag): void {
+    console.log('addReview start...');
     if (!this.checkIsLogedIn()) {
       this.snackBar.openFromComponent(AlarmSnackComponent, {
         duration: 2000,
@@ -276,6 +278,11 @@ export class HomeComponent implements OnInit {
       }
       this.addReview(category, course, result);
     });
+  }
+
+  chooseCourse() {
+    console.log(this.code);
+    this.loadCoursesList();
   }
 }
 
