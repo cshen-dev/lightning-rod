@@ -52,13 +52,16 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) {
-    this.authService.currentUserObservable.subscribe((user) => {
-      if (user) {
-        this.currentCourseReviewer = { displayName: user.displayName, uid: user.uid };
-      }else {
-        this.currentCourseReviewer = null;
-      }
-    });
+    const currentUser = this.authService.currentUserObservable;
+    if (currentUser) {
+      currentUser.subscribe((user) => {
+        if (user) {
+          this.currentCourseReviewer = { displayName: user.displayName, uid: user.uid };
+        }else {
+          this.currentCourseReviewer = null;
+        }
+      });
+    }
   }
 
 

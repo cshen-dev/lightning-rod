@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MaterialModule } from '../../material.module';
 import { AuthService } from '../auth/auth.service';
 import { CoursesService } from '../service/courses.service';
 
@@ -10,18 +11,23 @@ import { CoursesService } from '../service/courses.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private authService: AuthService,
-    private coursesService: CoursesService) { }
+  constructor(
+    private authService: AuthService,
+    private coursesService: CoursesService
+  ) { }
 
   displayName: string;
   email: string;
 
   ngOnInit() {
-    this.authService.currentUserObservable.subscribe((user) => {
+    const currentUser = this.authService.currentUserObservable;
+    if (currentUser) {
+      currentUser.subscribe((user) => {
 
-      this.displayName = user.displayName;
-      this.email = user.email;
-    });
+        this.displayName = user.displayName;
+        this.email = user.email;
+      });
+    }
   }
 
   injectSeed() {
