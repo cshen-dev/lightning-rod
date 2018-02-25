@@ -4,7 +4,6 @@ import * as firebase from 'firebase/app';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
-
 import { Review, ReviewCreator, CourseVersion } from '../service/courses.service';
 import { CoursesService } from '../service/courses.service';
 import { AuthService } from '../auth/auth.service';

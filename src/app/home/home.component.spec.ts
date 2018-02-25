@@ -1,11 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../material.module';
 import { HomeComponent } from './home.component';
-
 import { AuthService } from '../auth/auth.service';
 import { CoursesService } from '../service/courses.service';
 

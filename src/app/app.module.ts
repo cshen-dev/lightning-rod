@@ -5,18 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatChipsModule } from '@angular/material/chips';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { environment } from './../environments/environment';
+
+import { MaterialModule } from './material.module';
 
 import { AuthModule } from './auth/auth.module';
 import { AboutComponent } from './about/about.component';
@@ -57,17 +48,7 @@ export const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     NavigationModule,
     AngularFirestoreModule,
-    MatCardModule,
-    MatChipsModule,
-    FlexLayoutModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatTooltipModule,
+    MaterialModule,
     AuthModule,
     FormsModule,
     RouterModule.forRoot(

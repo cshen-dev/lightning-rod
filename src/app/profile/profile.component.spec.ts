@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MaterialModule } from '../material.module';
 import { ProfileComponent } from './profile.component';
-
 import { AuthService } from '../auth/auth.service';
 import { CoursesService } from '../service/courses.service';
 
@@ -21,7 +20,7 @@ describe('ProfileComponent', () => {
         MaterialModule
       ],
       providers: [
-        { provide: AuthService, useValue: authServiceStub }
+        { provide: AuthService, useValue: authServiceStub },
         { provide: CoursesService, useValue: {} }
       ]
     })

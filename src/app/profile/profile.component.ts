@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MaterialModule } from '../../material.module';
 import { AuthService } from '../auth/auth.service';
 import { CoursesService } from '../service/courses.service';
 
