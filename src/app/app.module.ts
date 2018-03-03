@@ -10,26 +10,19 @@ import { environment } from './../environments/environment';
 import { MaterialModule } from './material.module';
 
 import { AuthModule } from './auth/auth.module';
+import { NavigationModule } from './navigation/navigation.module';
+
+import { appRoutes } from './app.routes';
+
 import { AboutComponent } from './about/about.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AppComponent } from './app.component';
-import { NavigationModule } from './navigation/navigation.module';
 import { DetailComponent } from './detail/detail.component';
 import { HomeComponent, AddReviewDialogComponent, AlarmSnackComponent } from './home/home.component';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
+
 import { CoursesService } from './service/courses.service';
 
-export const appRoutes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'detail', component: DetailComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' }
-];
+
 
 @NgModule({
   declarations: [
