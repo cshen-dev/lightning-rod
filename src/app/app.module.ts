@@ -13,12 +13,8 @@ import { HomeModule } from './home';
 import { ProfileModule } from './profile';
 
 import { appRoutes } from './app.routes';
-
 import { AppComponent } from './app.component';
-
 import { CoursesService } from './service/courses.service';
-
-
 
 @NgModule({
   declarations: [
