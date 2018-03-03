@@ -76,10 +76,10 @@
                   Exam
                 </p>
                 <div fxFlex="85%">
-                    <mat-chip-list>
-                      <mat-chip (click)="addReview('exam', course, item.tag)" *ngFor="let item of course.exam" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
-                      <mat-chip (click)="popReviewDialog('exam', course)">+</mat-chip>
-                    </mat-chip-list>
+                  <mat-chip-list>
+                    <mat-chip (click)="addReview('exam', course, item.tag)" *ngFor="let item of course.exam" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                    <mat-chip (click)="popReviewDialog('exam', course)">+</mat-chip>
+                  </mat-chip-list>
                 </div>
               </li>
               <li fxLayout='row wrap'>
@@ -87,10 +87,10 @@
                   Programming
                 </p>
                 <div fxFlex="85%">
-                    <mat-chip-list>
-                      <mat-chip (click)="addReview('programming', course, item.tag)" *ngFor="let item of course.programming" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
-                      <mat-chip (click)="popReviewDialog('programming', course)">+</mat-chip>
-                    </mat-chip-list>
+                  <mat-chip-list>
+                    <mat-chip (click)="addReview('programming', course, item.tag)" *ngFor="let item of course.programming" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                    <mat-chip (click)="popReviewDialog('programming', course)">+</mat-chip>
+                  </mat-chip-list>
                 </div>
               </li>
               <li fxLayout='row wrap'>
@@ -112,5 +112,11 @@
         <button mat-button routerLink="/detail">More</button>
       </mat-card-actions> -->
     </mat-card>
+  </div>
+</div>
+
+<div fxLayout="row wrap" class="default-course-area">
+  <div fxFlex="15%" class="default-course" *ngFor="let course of courseList">
+    <button mat-raised-button (click)="quickSelect(course)">{{course}}</button>
   </div>
 </div>

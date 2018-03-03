@@ -50,7 +50,7 @@ export class CoursesService {
     this.user = authService.currentUserObservable;
   }
 
-  private coursesCollectionName = 'courses2';
+  private coursesCollectionName = 'courses';
   private courseReviewCollectionName = 'reviews';
 
 

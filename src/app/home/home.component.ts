@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Review, ReviewCreator, CourseVersion } from '../service/courses.service';
 import { CoursesService } from '../service/courses.service';
 import { AuthService } from '../auth/auth.service';
+import { courses } from '../seed/data';
 
 interface CourseViewModel {
   name: string;
@@ -44,6 +45,7 @@ export class HomeComponent implements OnInit {
   private versionPreference: Map<string, Date> = new Map();
   code: string;
   tooltipPos = 'below';
+  courseList: Array<string> = [];
 
   constructor(
     private authService: AuthService,
@@ -61,6 +63,11 @@ export class HomeComponent implements OnInit {
         }
       });
     }
+
+    courses.forEach( entry => {
+      this.courseList.push(entry.code);
+    });
+
   }
 
 
@@ -281,6 +288,11 @@ export class HomeComponent implements OnInit {
       }
       this.addReview(category, course, result);
     });
+  }
+
+  quickSelect(courseCode) {
+    this.code = courseCode;
+    this.loadCoursesList();
   }
 
   chooseCourse() {

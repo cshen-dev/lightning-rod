@@ -71,3 +71,11 @@
 mat-chip {
   margin: 8px 0 0 8px !important;
 }
+
+.default-course {
+  margin-bottom: 10px;
+}
+
+.default-course-area {
+  margin-left: 20px;
+}

@@ -17,14 +17,17 @@ export class ProfileComponent implements OnInit {
 
   displayName: string;
   email: string;
+  isAdmin = false;
 
   ngOnInit() {
     const currentUser = this.authService.currentUserObservable;
     if (currentUser) {
       currentUser.subscribe((user) => {
-
         this.displayName = user.displayName;
         this.email = user.email;
+        if (this.email === 'mushrchun@gmail.com') {
+          this.isAdmin = true;
+        }
       });
     }
   }
