@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 
-import { MaterialModule } from '../../material.module';
+import { MaterialModule } from '../../material';
 import { AuthService } from '../../auth/auth.service';
 import { HeaderComponent } from './header.component';
-import { appRoutes } from '../../app.module';
+import { appRoutes } from '../../app.routes';
 
 
 describe('HeaderComponent', () => {

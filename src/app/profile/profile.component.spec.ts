@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from '../material';
 import { ProfileComponent } from './profile.component';
 import { AuthService } from '../auth/auth.service';
 import { CoursesService } from '../service/courses.service';

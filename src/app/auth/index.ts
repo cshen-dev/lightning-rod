@@ -5,7 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 
 import { environment } from '../../environments/environment';
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from '../material';
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
