@@ -53,13 +53,16 @@
 }
 
 .title {
-  font: 400 34px/40px Roboto,"Helvetica Neue",sans-serif;
+  font: 400 30px/34px Roboto,"Helvetica Neue",sans-serif;
   margin: 20px 0 0 16px;
 }
 
 .subtitle {
   font: 300 14px/24px Roboto,"Helvetica Neue",sans-serif;
   margin: 0 0 0 16px;
+  /* 自动换行 */
+  word-wrap: break-word; 
+  word-break: normal; 
 }
 
 .head-img {
@@ -74,8 +77,15 @@ mat-chip {
 
 .default-course {
   margin-bottom: 10px;
+  margin-right: 10px;
+  
 }
-
+.btn-course{
+  width: 100px;
+}
 .default-course-area {
   margin-left: 20px;
+}
+.sidebar-wrapper{
+  background-color:#ccc;
 }
