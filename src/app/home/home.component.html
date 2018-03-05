@@ -1,7 +1,8 @@
-<div fxLayout='row'>
-  <div fxFlex="70%">
+<div fxLayout="row" fxLayout.lt-md="column">
+  <!-- sidebar begin -->
+  <div fxFlex="18%" class="sidebar-wrapper">
     <h1 class="title">Finding the right unit matters</h1>
-    <p class="subtitle">Want to hardcore skills or just take it easy, we want to help make every semester a good one.</p>
+    <p class="subtitle">Want to gain hardcore skills or just take it easy, we want to help make every semester a good one.</p>
     <div class="search-bar" fxLayoutAlign="left">
       <div matTooltip="Click Enter to Search" [matTooltipPosition]="tooltipPos">
         <mat-form-field>
@@ -9,114 +10,128 @@
         </mat-form-field>
       </div>
     </div>
+    <div fxLayout="row wrap" class="default-course-area">
+      <div class="default-course" *ngFor="let course of courseList">
+        <button class="btn-course" mat-raised-button (click)="quickSelect(course)">{{course}}</button>
+      </div>
+    </div>
+      <!-- sidebar end -->
   </div>
+  <div fxFlex="80%">
+    <div style="text-align: right">
+      <img class="head-img" src="../../../assets/img/discussion.jpg" alt="">
+    </div>
+    <div fxLayout='row wrap'>
+      <div *ngFor="let course of courses" fxFlex="100%" fxLayoutAlign="center">
+    
+        <mat-card class="course-card">
+          <mat-card-header>
+            <div mat-card-avatar class="course-card-header-image" [style.background-image]="course.logo"></div>
+            <mat-card-title>{{course.name}}</mat-card-title>
+            <mat-card-subtitle>{{course.code}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div fxLayout='row wrap'>
+              <div fxFlex="20%">
+                <div class="semester-selector">
+                  <button mat-icon-button [matMenuTriggerFor]="semester">
+                    {{course.instructor}}
+                    <mat-icon>
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </mat-icon>
+                  </button>
+                  <mat-menu #semester="matMenu">
+                    <button (click)="tuneVersionPriority(item.instructor)" mat-menu-item *ngFor="let item of course.versions">
+                      <span>{{item.instructor}}</span>
+                    </button>
+                  </mat-menu>
+                </div>
+    
+                <div>
+                  <img src="{{course.avatar}}" class="instructor-avatar" alt="">
+                </div>
+              </div>
+              <div fxFlex="80%">
+                <p>This instructor has taught this course for {{course.semester}}</p>
+                <ul class="tags-group">
+                  <li fxLayout='row wrap'>
+                    <p class="tag-header" fxFlex="15%">
+                      Work Load
+                    </p>
+                    <div fxFlex="85%">
+                      <mat-chip-list>
+                        <mat-chip (click)="addReview('workload', course, item.tag)" *ngFor="let item of course.workload" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                        <mat-chip (click)="popReviewDialog('workload', course)">+</mat-chip>
+                      </mat-chip-list>
+                    </div>
+                  </li>
+                  <li fxLayout='row wrap'>
+                    <p class="tag-header" fxFlex="15%">
+                      Assignment
+                    </p>
+                    <div fxFlex="85%">
+                      <mat-chip-list>
+                        <mat-chip (click)="addReview('assignment', course, item.tag)" *ngFor="let item of course.assignment" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                        <mat-chip (click)="popReviewDialog('assignment', course)">+</mat-chip>
+                      </mat-chip-list>
+                    </div>
+                  </li>
+                  <li fxLayout='row wrap'>
+                    <p class="tag-header" fxFlex="15%">
+                      Exam
+                    </p>
+                    <div fxFlex="85%">
+                      <mat-chip-list>
+                        <mat-chip (click)="addReview('exam', course, item.tag)" *ngFor="let item of course.exam" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                        <mat-chip (click)="popReviewDialog('exam', course)">+</mat-chip>
+                      </mat-chip-list>
+                    </div>
+                  </li>
+                  <li fxLayout='row wrap'>
+                    <p class="tag-header" fxFlex="15%">
+                      Programming
+                    </p>
+                    <div fxFlex="85%">
+                      <mat-chip-list>
+                        <mat-chip (click)="addReview('programming', course, item.tag)" *ngFor="let item of course.programming" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                        <mat-chip (click)="popReviewDialog('programming', course)">+</mat-chip>
+                      </mat-chip-list>
+                    </div>
+                  </li>
+                  <li fxLayout='row wrap'>
+                    <p class="tag-header" fxFlex="15%">
+                      Marking
+                    </p>
+                    <div fxFlex="85%">
+                      <mat-chip-list>
+                        <mat-chip (click)="addReview('marking', course, item.tag)" *ngFor="let item of course.marking" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
+                        <mat-chip (click)="popReviewDialog('marking', course)">+</mat-chip>
+                      </mat-chip-list>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </mat-card-content>
+          <!-- <mat-card-actions>
+            <button mat-button routerLink="/detail">More</button>
+          </mat-card-actions> -->
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div fxLayout='row'>
   <div fxFlex="20%">
     <img class="head-img" src="../../../assets/img/discussion.jpg" alt="">
   </div>
-</div>
+</div> -->
 
 
-<div fxLayout='row wrap'>
-  <div *ngFor="let course of courses" fxFlex="100%" fxLayoutAlign="center">
 
-    <mat-card class="course-card">
-      <mat-card-header>
-        <div mat-card-avatar class="course-card-header-image" [style.background-image]="course.logo"></div>
-        <mat-card-title>{{course.name}}</mat-card-title>
-        <mat-card-subtitle>{{course.code}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div fxLayout='row wrap'>
-          <div fxFlex="20%">
-            <div class="semester-selector">
-              <button mat-icon-button [matMenuTriggerFor]="semester">
-                {{course.instructor}}
-                <mat-icon>
-                  <i class="material-icons">keyboard_arrow_down</i>
-                </mat-icon>
-              </button>
-              <mat-menu #semester="matMenu">
-                <button (click)="tuneVersionPriority(item.instructor)" mat-menu-item *ngFor="let item of course.versions">
-                  <span>{{item.instructor}}</span>
-                </button>
-              </mat-menu>
-            </div>
 
-            <div>
-              <img src="{{course.avatar}}" class="instructor-avatar" alt="">
-            </div>
-          </div>
-          <div fxFlex="80%">
-            <p>This instructor has taught this course for {{course.semester}}</p>
-            <ul class="tags-group">
-              <li fxLayout='row wrap'>
-                <p class="tag-header" fxFlex="15%">
-                  Work Load
-                </p>
-                <div fxFlex="85%">
-                  <mat-chip-list>
-                    <mat-chip (click)="addReview('workload', course, item.tag)" *ngFor="let item of course.workload" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
-                    <mat-chip (click)="popReviewDialog('workload', course)">+</mat-chip>
-                  </mat-chip-list>
-                </div>
-              </li>
-              <li fxLayout='row wrap'>
-                <p class="tag-header" fxFlex="15%">
-                  Assignment
-                </p>
-                <div fxFlex="85%">
-                  <mat-chip-list>
-                    <mat-chip (click)="addReview('assignment', course, item.tag)" *ngFor="let item of course.assignment" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
-                    <mat-chip (click)="popReviewDialog('assignment', course)">+</mat-chip>
-                  </mat-chip-list>
-                </div>
-              </li>
-              <li fxLayout='row wrap'>
-                <p class="tag-header" fxFlex="15%">
-                  Exam
-                </p>
-                <div fxFlex="85%">
-                  <mat-chip-list>
-                    <mat-chip (click)="addReview('exam', course, item.tag)" *ngFor="let item of course.exam" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
-                    <mat-chip (click)="popReviewDialog('exam', course)">+</mat-chip>
-                  </mat-chip-list>
-                </div>
-              </li>
-              <li fxLayout='row wrap'>
-                <p class="tag-header" fxFlex="15%">
-                  Programming
-                </p>
-                <div fxFlex="85%">
-                  <mat-chip-list>
-                    <mat-chip (click)="addReview('programming', course, item.tag)" *ngFor="let item of course.programming" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
-                    <mat-chip (click)="popReviewDialog('programming', course)">+</mat-chip>
-                  </mat-chip-list>
-                </div>
-              </li>
-              <li fxLayout='row wrap'>
-                <p class="tag-header" fxFlex="15%">
-                  Marking
-                </p>
-                <div fxFlex="85%">
-                  <mat-chip-list>
-                    <mat-chip (click)="addReview('marking', course, item.tag)" *ngFor="let item of course.marking" selected="true">{{item.tag}} {{item.upvote}}</mat-chip>
-                    <mat-chip (click)="popReviewDialog('marking', course)">+</mat-chip>
-                  </mat-chip-list>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </mat-card-content>
-      <!-- <mat-card-actions>
-        <button mat-button routerLink="/detail">More</button>
-      </mat-card-actions> -->
-    </mat-card>
-  </div>
-</div>
-
-<div fxLayout="row wrap" class="default-course-area">
+<!-- <div fxLayout="row wrap" class="default-course-area">
   <div fxFlex="15%" class="default-course" *ngFor="let course of courseList">
     <button mat-raised-button (click)="quickSelect(course)">{{course}}</button>
   </div>
-</div>
+</div> -->
