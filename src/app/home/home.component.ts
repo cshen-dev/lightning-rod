@@ -63,11 +63,9 @@ export class HomeComponent implements OnInit {
         }
       });
     }
-
     courses.forEach( entry => {
       this.courseList.push(entry.code);
     });
-
   }
 
 
@@ -296,9 +294,20 @@ export class HomeComponent implements OnInit {
   }
 
   chooseCourse() {
-    console.log(this.code);
+    // console.log(this.code);
+    this.filterCourseList(this.code);
     this.loadCoursesList();
   }
+
+  filterCourseList(query) {
+    const cList = courses;
+    const result = query ? cList.filter(c => {
+      return c.code.toLowerCase().indexOf(query.toLowerCase()) >= 0;
+    }) : cList;
+    this.courseList = result.map(res => {
+      return res.code;
+    });
+    }
 }
 
 @Component({
