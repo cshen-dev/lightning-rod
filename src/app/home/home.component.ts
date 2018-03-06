@@ -52,7 +52,9 @@ export class HomeComponent implements OnInit {
     private _coursesService: CoursesService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
-  ) {
+  ) { }
+
+  ngOnInit() {
     const currentUser = this.authService.currentUserObservable;
     if (currentUser) {
       currentUser.subscribe((user) => {
@@ -66,10 +68,7 @@ export class HomeComponent implements OnInit {
     courses.forEach( entry => {
       this.courseList.push(entry.code);
     });
-  }
 
-
-  ngOnInit() {
     this.loadCoursesList();
   }
 
@@ -78,7 +77,7 @@ export class HomeComponent implements OnInit {
       return;
     }
     const courseInfoSubscription = this._coursesService.getCoursesInfo(this.code).subscribe(courses => {
-      console.log(courses);
+      // console.log(courses);
       courses.forEach(course => { this.loadCourseReview(course); });
     });
     this.subscriptions.push(courseInfoSubscription);
@@ -125,7 +124,6 @@ export class HomeComponent implements OnInit {
   }
 
   public tuneVersionPriority(instructor) {
-    console.log('trigger tune priority');
     this.versionPreference.set(instructor, new Date());
 
     this.subscriptions.forEach(item => {
@@ -252,7 +250,6 @@ export class HomeComponent implements OnInit {
   }
 
   addReview(category, course, tag): void {
-    console.log('addReview start...');
     if (!this.checkIsLogedIn()) {
       this.snackBar.openFromComponent(AlarmSnackComponent, {
         duration: 2000,

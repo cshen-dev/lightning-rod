@@ -77,13 +77,10 @@ export class CoursesService {
   }
 
   public createSeedData() {
-    console.log('start inject...');
 
     const creator = {} as ReviewCreator;
 
     this.authService.user.subscribe(user => {
-      console.log(user.displayName);
-      console.log(user.uid);
       creator.uid = user.uid;
       creator.displayName = user.displayName;
     });
@@ -105,7 +102,6 @@ export class CoursesService {
   }
 
   public addReviews(courseId, newReview) {
-    console.log('in addreview service...');
     return this.afs
       .collection(this.coursesCollectionName)
       .doc(courseId)

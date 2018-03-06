@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
     const currentUser = this.authService.currentUserObservable;
     if (currentUser) {
       currentUser.subscribe((user) => {
+        if (!user) {return; }
         this.displayName = user.displayName;
         this.email = user.email;
         if (this.email === 'mushrchun@gmail.com') {
