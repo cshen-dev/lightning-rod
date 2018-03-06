@@ -76,9 +76,9 @@ export class HomeComponent implements OnInit {
     if (!this.code ) {
       return;
     }
-    const courseInfoSubscription = this._coursesService.getCoursesInfo(this.code).subscribe(courses => {
+    const courseInfoSubscription = this._coursesService.getCoursesInfo(this.code).subscribe(coursesInfos => {
       // console.log(courses);
-      courses.forEach(course => { this.loadCourseReview(course); });
+      coursesInfos.forEach(course => { this.loadCourseReview(course); });
     });
     this.subscriptions.push(courseInfoSubscription);
   }
