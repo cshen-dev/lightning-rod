@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayout.lt-md="column">
   <!-- sidebar begin -->
-  <div fxFlex="18%" class="sidebar-wrapper">
+  <div fxFlex="25%" class="sidebar-wrapper">
     <h1 class="title">Finding the right unit matters</h1>
     <p class="subtitle">Want to gain hardcore skills or just take it easy, we want to help make every semester a good one.</p>
     <div class="search-bar" fxLayoutAlign="left">
@@ -17,13 +17,13 @@
     </div>
       <!-- sidebar end -->
   </div>
-  <div fxFlex="80%">
+  <div fxFlex="75%">
     <div style="text-align: right">
-      <img class="head-img" src="../../../assets/img/discussion.jpg" alt="">
+      <img class="head-img" src="../../../assets/img/discussion.png" alt="">
     </div>
     <div fxLayout='row wrap'>
       <div *ngFor="let course of courses" fxFlex="100%" fxLayoutAlign="center">
-    
+
         <mat-card class="course-card">
           <mat-card-header>
             <div mat-card-avatar class="course-card-header-image" [style.background-image]="course.logo"></div>
@@ -46,7 +46,7 @@
                     </button>
                   </mat-menu>
                 </div>
-    
+
                 <div>
                   <img src="{{course.avatar}}" class="instructor-avatar" alt="">
                 </div>
